@@ -39,144 +39,153 @@
     <!-- Start: Main content-->
     <div class="chargeMoneyMobile">
         <div class="containerForm" >
-           
-            <div class="chargeMoneyMobile-row numberphoneInput" >
-                <div class="form__group field">
-                    <input type="tel" class="form__field" placeholder="name" name="name" id='name' required 
-                     pattern="(?:\+?[1-9]\d{0,2}\s?|0)\(?\d{3,4}\)?[\s.-]?\d{3}[\s.-]?\d{3,4}" minlength="9" maxlength="12"/>
-                    <label for="name" class="form__label">Vui lòng nhập số điện thoại của bạn: </label>
+            <form class="chargeMoneyMobile-row numberphoneInput" id="chargePayoutSubmit">
+                <div class="chargeMoneyMobile-row " >
+                    <div class="form__group field">
+                        <input type="number" class="form__field accountNumber" placeholder="name" name="name" id='name' required
+                               pattern="(?:\+?[1-9]\d{0,2}\s?|0)\(?\d{3,4}\)?[\s.-]?\d{3}[\s.-]?\d{3,4}" minlength="6" maxlength="12"/>
+                        <label for="name" class="form__label ">Vui lòng nhập số tài khoản: </label>
+                    </div>
+
+                    <div class="form__group field">
+                        <input type="text" class="form__field accountName" placeholder="name" name="name" id='name' required
+                               minlength="6" maxlength="12"/>
+                        <label for="name" class="form__label ">Vui lòng nhập tên tài khoản: </label>
+                    </div>
+
+                    <div class="form__group field">
+                        <input type="number" class="form__field amount" placeholder="name" name="name" id='name' required
+                               pattern="(?:\+?[1-9]\d{0,2}\s?|0)\(?\d{3,4}\)?[\s.-]?\d{3}[\s.-]?\d{3,4}" minlength="6" maxlength="12"/>
+                        <label for="name" class="form__label ">Vui lòng nhập số tiền cần rút: </label>
+                    </div>
                 </div>
-            </div>
-            <br>
+                <br>
 
-            <h4>Lựa chọn nhà mạng:</h4>
-            <form class="chargeMoneyMobile-row selectNetwork">
-                <input type="radio" name="brandtype" id="1" class="hidebx" value="viettel">
-                <label for="1" class="lbl-radio">
-                    <div class="display-box">
-                        <img src="https://cdn.divineshop.vn/static/a0d5a326b4ffdb25423b7718b79b06e7.svg" alt="">
-                            {{!-- <div class="price">Giảm giá 5%</div> --}}
-                    </div>
-                </label>
+                <h4>Lựa chọn ngân hàng:</h4>
+                    <div class="chargeMoneyMobile-row selectBank">
+                        <input type="radio" name="brandtype" id="1" class="hidebx" value="SAIGONBANK">
+                        <label for="1" class="lbl-radio">
+                            <div class="display-box">
+                                <img src="https://api.vietqr.io/img/SGICB.png" alt="">
+                                {{!-- <div class="price">Giảm giá 5%</div> --}}
+                            </div>
+                        </label>
 
-                <input type="radio" name="brandtype" id="2" class="hidebx" value="mobifone">
-                <label for="2" class="lbl-radio">
-                    <div class="display-box">
-                        {{!-- <div class="size">Nạp tiền chậm</div>
-                        <div class="price">Giảm giá 12%</div> --}}
-                        <img src="https://cdn.divineshop.vn/static/505f6720740a9cf0d74b62fef0835ec4.svg" alt="">
-                    </div>
-                </label>  
+                        <input type="radio" name="brandtype" id="2" class="hidebx" value="SACOMBANK">
+                        <label for="2" class="lbl-radio">
+                            <div class="display-box">
+                                {{!-- <div class="size">Nạp tiền chậm</div>
+                                <div class="price">Giảm giá 12%</div> --}}
+                                <img src="https://api.vietqr.io/img/STB.png" alt="">
+                            </div>
+                        </label>
 
-                <input type="radio" name="brandtype" id="3" class="hidebx" value="vinaphone">
-                <label for="3" class="lbl-radio">
-                    <div class="display-box">
-                        {{!-- <div class="size">Mua thẻ cào thường</div>
-                        <div class="price">Giảm giá 3%</div> --}}
-                        <img src="https://cdn.divineshop.vn/static/38a2b33a023b1a564dacf4fa6f4487c7.svg" alt="">
-                    </div>
-                </label>
+                        <input type="radio" name="brandtype" id="3" class="hidebx" value="AGRIBANK">
+                        <label for="3" class="lbl-radio">
+                            <div class="display-box">
+                                {{!-- <div class="size">Mua thẻ cào thường</div>
+                                <div class="price">Giảm giá 3%</div> --}}
+                                <img src="https://api.vietqr.io/img/VBA.png" alt="">
+                            </div>
+                        </label>
 
-                <input type="radio" name="brandtype" id="4" class="hidebx" value="vietnammobile">
-                <label for="4" class="lbl-radio">
-                    <div class="display-box">
-                        {{!-- <div class="size">Mua thẻ cào nạp ngay</div>
-                        <div class="price">Giảm giá 15%</div> --}}
-                        <img src="https://upload.wikimedia.org/wikipedia/vi/a/a8/Vietnamobile_Logo.svg" alt="">
-                    </div>
-                </label>
+                        <input type="radio" name="brandtype" id="4" class="hidebx" value="DONGABANK">
+                        <label for="4" class="lbl-radio">
+                            <div class="display-box">
+                                {{!-- <div class="size">Mua thẻ cào nạp ngay</div>
+                                <div class="price">Giảm giá 15%</div> --}}
+                                <img src="https://api.vietqr.io/img/DOB.png" alt="">
+                            </div>
+                        </label>
 
-                <input type="radio" name="brandtype" id="5" class="hidebx" value="gmobile">
-                <label for="5" class="lbl-radio">
-                    <div class="display-box">
-                        {{!-- <div class="size">Mua thẻ cào nạp ngay</div>
-                        <div class="price">Giảm giá 15%</div> --}}
-                        <img src="https://muathe123.vn/pictures/news/2021/01/04/siv1609744453.jpg" alt="G-mobile">
-                    </div>
-                </label>
-            </form>
-            <br>
-            
-            <h4>Lựa chọn mệnh giá:</h4>
-            <form class="chargeMoneyMobile-row selectDeno" id="deno">
-                {{!-- Start: Select buttons for denominations  --}}
-                <input type="radio" name="deno" id="6" class="hidebx deno" value="10000">
-                <label for="6" class="deno-radio">
-                    <div class="display-box">
-                        <div class="realPrice">9.000đ</div>
-                        <strike class="price">10.000đ</strike>
-                        <h6 class="saleoff">-2%</h6>
-                    </div>
-                </label>
+                        <input type="radio" name="brandtype" id="5" class="hidebx" value="TECHCOMBANK">
+                        <label for="5" class="lbl-radio">
+                            <div class="display-box">
+                                <img src="https://api.vietqr.io/img/TCB.png" alt="G-mobile">
+                            </div>
+                        </label>
 
-                <input type="radio" name="deno" id="7" class="hidebx deno" value="20000">
-                <label for="7" class="deno-radio">
-                    <div class="display-box">
-                        <div class="realPrice">18.000đ</div>
-                        <strike class="price">20.000đ</strike>
-                        <h6 class="saleoff">-2%</h6>
-                    </div>
-                </label>
+                        <input type="radio" name="brandtype" id="6" class="hidebx" value="VIB">
+                        <label for="6" class="lbl-radio">
+                            <div class="display-box">
+                                <img src="https://api.vietqr.io/img/VIB.png" alt="G-mobile">
+                            </div>
+                        </label>
 
-                <input type="radio" name="deno" id="8" class="hidebx deno" value="30000">
-                <label for="8" class="deno-radio">
-                    <div class="display-box">
-                        <div class="realPrice">27.000đ</div>
-                        <strike class="price">30.000đ</strike>
-                        <h6 class="saleoff">-2%</h6>
-                    </div>
-                </label>
+                        <input type="radio" name="brandtype" id="7" class="hidebx" value="ACB">
+                        <label for="7" class="lbl-radio">
+                            <div class="display-box">
+                                <img src="https://api.vietqr.io/img/ACB.png" alt="G-mobile">
+                            </div>
+                        </label>
 
-                <input type="radio" name="deno" id="9" class="hidebx deno" value="50000">
-                <label for="9" class="deno-radio">
-                    <div class="display-box">
-                        <div class="realPrice">45.000đ</div>
-                        <strike class="price">50.000đ</strike>
-                        <h6 class="saleoff">-2%</h6>
-                    </div>
-                </label>
+                        <input type="radio" name="brandtype" id="8" class="hidebx" value="BACABANK">
+                        <label for="8" class="lbl-radio">
+                            <div class="display-box">
+                                <img src="https://api.vietqr.io/img/BAB.png" alt="G-mobile">
+                            </div>
+                        </label>
 
-                <input type="radio" name="deno" id="10" class="hidebx deno" value="100000">
-                <label for="10" class="deno-radio">
-                    <div class="display-box">
-                        <div class="realPrice">90.000đ</div>
-                        <strike class="price">100.000đ</strike>
-                        <h6 class="saleoff">-2%</h6>
-                    </div>
-                </label>
+                        <input type="radio" name="brandtype" id="9" class="hidebx" value="PVCOMBANK">
+                        <label for="9" class="lbl-radio">
+                            <div class="display-box">
+                                <img src="https://api.vietqr.io/img/PVCB.png" alt="G-mobile">
+                            </div>
+                        </label>
 
-                <input type="radio" name="deno" id="11" class="hidebx deno" value="200000">
-                <label for="11" class="deno-radio">
-                    <div class="display-box">
-                        <div class="realPrice">180.000đ</div>
-                        <strike class="price">200.000đ</strike>
-                        <h6 class="saleoff">-2%</h6>
-                    </div>
-                </label>
+                        <input type="radio" name="brandtype" id="10" class="hidebx" value="OCEANBANK">
+                        <label for="10" class="lbl-radio">
+                            <div class="display-box">
+                                <img src="https://api.vietqr.io/img/OCEANBANK.png" alt="G-mobile">
+                            </div>
+                        </label>
 
-                <input type="radio" name="deno" id="12" class="hidebx deno" value="300000">
-                <label for="12" class="deno-radio">
-                    <div class="display-box">
-                        <div class="realPrice">270.000đ</div>
-                        <strike class="price">300.000đ</strike>
-                        <h6 class="saleoff">-2%</h6>
-                    </div>
-                </label>
+                        <input type="radio" name="brandtype" id="11" class="hidebx" value="VIETINBANK">
+                        <label for="11" class="lbl-radio">
+                            <div class="display-box">
+                                <img src="https://api.vietqr.io/img/ICB.png" alt="G-mobile">
+                            </div>
+                        </label>
 
-                <input type="radio" name="deno" id="13" class="hidebx deno" value="500000">
-                <label for="13" class="deno-radio">
-                    <div class="display-box">
-                        <div class="realPrice">450.000đ</div>
-                        <strike class="price">500.000đ</strike>
-                        <h6 class="saleoff">-2%</h6>
-                    </div>
-                </label>
-                
-            </form>
-            <br>
+                        <input type="radio" name="brandtype" id="12" class="hidebx" value="BIDV">
+                        <label for="12" class="lbl-radio">
+                            <div class="display-box">
+                                <img src="https://api.vietqr.io/img/BIDV.png" alt="G-mobile">
+                            </div>
+                        </label>
 
-            <form class="chargeMoneyMobile-row button_submit">
-                <button type="submit" class="btnSubmit"><span>Hover me!</span></button>
+                        <input type="radio" name="brandtype" id="13" class="hidebx" value="MBBank">
+                        <label for="13" class="lbl-radio">
+                            <div class="display-box">
+                                <img src="https://api.vietqr.io/img/MB.png" alt="G-mobile">
+                            </div>
+                        </label>
+
+                        <input type="radio" name="brandtype" id="14" class="hidebx" value="VIETCOMBANK">
+                        <label for="14" class="lbl-radio">
+                            <div class="display-box">
+                                <img src="https://api.vietqr.io/img/VCB.png" alt="G-mobile">
+                            </div>
+                        </label>
+
+                        <input type="radio" name="brandtype" id="15" class="hidebx" value="MSB">
+                        <label for="15" class="lbl-radio">
+                            <div class="display-box">
+                                <img src="https://api.vietqr.io/img/MSB.png" alt="G-mobile">
+                            </div>
+                        </label>
+
+                        <input type="radio" name="brandtype" id="16" class="hidebx" value="EXIMBANK">
+                        <label for="16" class="lbl-radio">
+                            <div class="display-box">
+                                <img src="https://api.vietqr.io/img/EIB.png" alt="G-mobile">
+                            </div>
+                        </label>
+
+
+                    </div>
+                <br>
+                <button type="submit" class="btnSubmit"><span>Rút tiền!</span></button>
             </form>
         </div>
     </div>
@@ -199,7 +208,7 @@
     <!-- footer-end -->
 
     <!-- Start - My JS here -->
-        <script src="js/my_js/top_up_mobile.js"></script>
+        <script src="js/my_js/pay_out_payment.js"></script>
         
     <!-- End - My JS here -->
     <script>
