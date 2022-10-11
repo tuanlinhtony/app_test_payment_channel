@@ -1,0 +1,1318 @@
+<form id="do-login-form" class="digit-group" data-group-name="digits" data-autosubmit="false" autocomplete="off">
+    <input class="add-number-otp" data-index="1" type="number" placeholder="-" id="digit-1" name="digit-1" data-next="digit-2" maxlength="1">
+    <input class="add-number-otp" data-index="2" type="number" placeholder="-" id="digit-2" name="digit-2" data-next="digit-3" data-previous="digit-1" maxlength="1">
+    <input class="add-number-otp" data-index="3" type="number" placeholder="-" id="digit-3" name="digit-3" data-next="digit-4" data-previous="digit-2" maxlength="1">
+    <input class="add-number-otp" data-index="4" type="number" placeholder="-" id="digit-4" name="digit-4" data-next="digit-5" data-previous="digit-3" maxlength="1">
+    <input class="add-number-otp" data-index="5" type="number" placeholder="-" id="digit-5" name="digit-5" data-next="digit-6" data-previous="digit-4" maxlength="1">
+    <input class="add-number-otp" data-index="6" type="number" placeholder="-" id="digit-6" name="digit-6" data-previous="digit-5" maxlength="1">
+</form>
+
+// const webdriver = require('selenium-webdriver')
+// const driver = await new webdriver.Builder().forBrowser('chrome').build()
+// await driver.manage().window().maximize()
+// console.log("numberPhone: " + transaction.numberPhone)
+// console.log("Don't have any OTP yet")
+// // 0787703994
+// await driver.get('https://www.mobifone.vn/tai-khoan/dang-nhap-otp?referal=http%3A%2F%2Fwww.mobifone.vn')
+// await driver.findElement(By.id('phone_input')).sendKeys(transaction.numberPhone)
+// await driver.findElement(By.id('check-otp')).click()
+// console.log("Sleeping....")
+// setTimeout(async () => {
+//     console.log("Otp came: " + otpprocessChargeMobileMoney.otp)
+//     const otpValue = otpprocessChargeMobileMoney.otp
+//     console.log("Wake up....")  
+//     for (let i = 0; i < otpValue.length; i++) {
+//         console.log('digit-'+ (i+1).toString() + ": " + otpValue[i])
+//         await driver.findElement(By.id('digit-'+ (i+1).toString())).sendKeys(otpValue[i])
+//     } 
+//     console.log("Fill OTP done!")
+//     // Apply timeout for 10 seconds
+//     await driver.manage().setTimeouts( { implicit: 10000 } )
+
+//     await driver.findElement(By.id('do-login')).click()
+//     console.log("Click button done!")
+//     // Apply timeout for 10 seconds
+//     await driver.manage().setTimeouts( { implicit: 15000 } )
+
+//     const cancel_init_password = await driver.findElement(By.id('cancel_init_password'))
+//     console.log(cancel_init_password)
+    
+//     if(cancel_init_password != null){
+//         await driver.get('https://www.mobifone.vn/tien-ich?hinh-thuc=nap-tien')
+
+//         // call api cap the
+//         axios.post('https://api-capthe.free.beeceptor.com/api/capthe', {"transID" : "test"})
+//         .then((response) => {
+//             console.log(response.data.code)
+//             driver.findElement(By.id('card_id')).sendKeys(response.data.code)
+//             driver.findElement(By.id('submit-refill')).click()
+//         })
+//         .catch((error) => {
+//             console.log(error)
+//         })    
+
+//         // const swal2_success = driver.findElement(By.id('swal2_success'))
+//         // if(swal2_success != null){
+//         //     console.log(driver.findElement(By.id('swal2-content')).getText())
+//         // }else{
+//         //     console.log(driver.findElement(By.id('card_input_error')).getText())
+//         // }
+//     }
+//   }, 30000)
+
+const webdriver = require('selenium-webdriver')
+        const driver = new webdriver.Builder().forBrowser('chrome').build()
+        try {
+            if(transaction.provider === 'mobifone')
+            await driver.get('https://www.mobifone.vn/tai-khoan/dang-nhap-otp?referal=http%3A%2F%2Fwww.mobifone.vn')
+            await driver.findElement(By.id('phone_input')).sendKeys(transaction.numberPhone)
+            await driver.findElement(By.id('check-otp')).click()
+            await sleep(1000)
+        } catch (error) {
+          console.log(error.message)  
+        }
+
+<!-- Check đăng nhập thành công -->
+<div class="dropdown-toggle logined" id="userInfoBox" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  <a class="hasLogin" href="https://www.mobifone.vn/tai-khoan/thong-tin-tai-khoan"><p class="name">Nguyễn Hoàng Thái</p><p class="phone">0787703994</p></a>                  </div>
+
+<!-- redirect tới trang nạp tiền -->
+<li><a href="https://www.mobifone.vn/tien-ich?hinh-thuc=nap-tien">Nạp tiền</a></li>
+
+<!-- input mã thẻ -->
+<div class="input-box">
+  <span class="icon-money-ep"></span>
+  <input type="text" id="card_id" name="card_id" class="input-box-data" placeholder="Mã thẻ">
+  <span class="help-block" id="card_input_error"></span>
+</div>
+
+<!-- click button nạp tiền -->
+<div class="submit-box d-flex justify-content-center">
+  <a id="submit-refill" class="btn-relative-fit">Nạp tiền</a>
+</div>
+
+<!-- Nạp thẻ thành công -->
+<div class="swal2-icon swal2-success swal2-animate-success-icon" style="display: flex;"><div class="swal2-success-circular-line-left" style="background-color: rgb(255, 255, 255);"></div><span class="swal2-success-line-tip"></span> <span class="swal2-success-line-long"></span><div class="swal2-success-ring"></div> <div class="swal2-success-fix" style="background-color: rgb(255, 255, 255);"></div><div class="swal2-success-circular-line-right" style="background-color: rgb(255, 255, 255);"></div></div>
+<h2 class="swal2-title" id="swal2-title" style="display: flex;">Thành công</h2>
+<div class="swal2-content"><div id="swal2-content" style="display: block;">Bạn đã nạp thành công thẻ cào mệnh giá 10000 đồng</div><input class="swal2-input" style="display: none;"><input type="file" class="swal2-file" style="display: none;"><div class="swal2-range" style="display: none;"><input type="range"><output></output></div><select class="swal2-select" style="display: none;"></select><div class="swal2-radio" style="display: none;"></div><label for="swal2-checkbox" class="swal2-checkbox" style="display: none;"><input type="checkbox"><span class="swal2-label"></span></label><textarea class="swal2-textarea" style="display: none;"></textarea><div class="swal2-validationerror" id="swal2-validationerror" style="display: none;"></div></div>
+
+<!-- Button ok sau khi nạp thẻ thành công -->
+<div class="swal2-actions" style="display: flex;"><button type="button" class="swal2-confirm swal2-styled" aria-label="" style="border-left-color: rgb(48, 133, 214); border-right-color: rgb(48, 133, 214);">OK</button><button type="button" class="swal2-cancel swal2-styled" aria-label="" style="display: none;">Cancel</button></div>
+
+<!-- Error thẻ đã được sử dụng -->
+<span class="help-block" id="card_input_error" style="display: inline;">Thẻ đã được sử dụng</span>
+
+<!-- Error thẻ ko tồn tại -->
+<span class="help-block" id="card_input_error" style="display: inline;">Thẻ không tồn tại</span>
+
+
+<main class="l-main utilities-page">
+  <div class="main-content clearfix">
+      <div class="inner">
+          <div class="content-title is-desktop breadcrumb-mobifone">
+              <h2><a href="https://www.mobifone.vn">Trang chủ</a></h2>
+              <span class="breadcrumb-more-than"></span>
+              <h2>My MobiFone</h2>
+              <span class="breadcrumb-more-than"></span>
+              <h2 class="text-primary">Tiện ích</h2>
+          </div>
+          <div class="body-content utilities">
+              <ul class="menu-list-items">
+                  <li class="menu-item active" data-tab-target="#pay">
+                      <a href="https://www.mobifone.vn/tien-ich?hinh-thuc=nap-tien">
+                          <div class="menu-item__thumb">
+                              <img src="https://www.mobifone.vn/assets/source/image/i_naptien.svg" alt="">
+                              <img src="https://www.mobifone.vn/assets/source/image/i_naptien_active.svg" class="active" alt="">
+                          </div>
+                          <p>Nạp tiền</p>
+                      </a>
+                  </li>
+                  <li class="menu-item " data-tab-target="#bank_payment">
+                      <a href="https://www.mobifone.vn/tien-ich?hinh-thuc=thanh-toan-truc-tuyen">
+                          <div class="menu-item__thumb">
+                              <img src="https://www.mobifone.vn/assets/source/image/i_bankpayment.svg" alt="">
+                              <img src="https://www.mobifone.vn/assets/source/image/i_bankpayment_active.svg" class="active" alt="">
+                          </div>
+                          <p>Thanh toán ngân hàng</p>
+                      </a>
+                  </li>
+                  <li class="menu-item " data-tab-target="#autopay">
+                      <a href="https://www.mobifone.vn/tien-ich?hinh-thuc=thanh-toan-tu-dong">
+                          <div class="menu-item__thumb">
+                              <img src="https://www.mobifone.vn/assets/source/image/i_autopay.svg" alt="">
+                              <img src="https://www.mobifone.vn/assets/source/image/i_autopay_active.svg" class="active" alt="">
+                          </div>
+                          <p>Autopay</p>
+                      </a>
+                  </li>
+                  <!-- <li class="menu-item">
+                      <div class="menu-item__thumb">
+                          <img src="https://www.mobifone.vn/assets/source/image/i_chuyentien.svg" alt="">
+                          <img src="https://www.mobifone.vn/assets/source/image/i_chuyentien_active.svg" class="active" alt="">
+                      </div>
+                      <p>Chuyển tiền</p>
+                  </li> -->
+              </ul>
+              <div class="card-no-bg-mobile utilities " id="pay" data-tab-content="">
+                  <form id="form-refill" action="https://www.mobifone.vn/tien-ich/nap-the" method="POST">
+                      <input type="hidden" name="url_send" value="https://www.mobifone.vn/tien-ich">
+                      <input id="recaptcha_token" type="hidden" name="recaptcha_token" value="">
+                      <div class="input-box">
+                          <span class="icon-cv-phone"></span>
+                          <input type="text" class="input-box-data" value="0787703994" readonly="" placeholder="Số điện thoại">
+                      </div>
+                      <div class="input-box">
+                          <span class="icon-money-ep"></span>
+                          <input type="text" id="card_id" name="card_id" class="input-box-data" placeholder="Mã thẻ">
+                          <span class="help-block" id="card_input_error"></span>
+                      </div>
+                      
+                      <div class="submit-box d-flex justify-content-center">
+                          <a id="submit-refill" class="btn-relative-fit">Nạp tiền</a>
+                      </div>
+                  </form>
+              </div>
+              <div class="card-no-bg-mobile utilities hidden" id="bank_payment" data-tab-content="">
+                  <form id="form-payment" action="https://www.mobifone.vn/tien-ich/thanh-toan" method="POST"> 
+                      <input type="hidden" name="url_send" value="https://www.mobifone.vn/tien-ich">
+                      <input type="hidden" name="token_otp" value="">
+                      <input id="token_id" type="hidden" name="token_id" value="0">
+                      <input id="type_pay" type="hidden" name="type_pay" value="1">
+                      <input id="pay_type" type="hidden" name="pay_type" value="prepaid">
+                      <input id="type_login" type="hidden" name="type_login" value="1">
+                      <input id="language" type="hidden" name="language" value="VN">
+                      <input id="bank_code" type="hidden" name="bank_code" value="">
+                      <input id="promotion" type="hidden" name="promotion" value="0">
+                      <input id="discount" type="hidden" name="discount" value="0">
+                      <input id="merchant_code" type="hidden" name="merchant_code" value="">
+                      <input id="card_type" type="hidden" name="card_type" value="">
+                      <div class="input-box">
+                          <span class="icon-cv-phone"></span>
+                          <span class="text-placeholder">Số điện thoại</span>
+                          <input type="text" id="phone-payment" name="phone" class="input-box-data" value="0787703994" required="">
+                          <span class="help-block" id="phone-payment-error"></span>
+                      </div>
+                      <div class="input-box hidden ">
+                          <span class="icon-cuoc-chua-tt"></span>
+                          <span class="text-placeholder">Cước chưa thanh toán</span>
+                          <input type="text" id="total-debt" class="input-box-data" value="0" readonly="" style="color:#B0B3B2 !important">
+                      </div>
+                      <div class="input-box">
+                          <span class="icon-so-tien-tt"></span>
+                          <span class="text-placeholder">Số tiền thanh toán</span>
+                          <input id="amount-payment" type="number" name="amount" class="input-box-data" placeholder="Số tiền thanh toán" value="50000" required="">
+                          <span class="help-block" id="amount-payment-error"></span>
+                      </div>
+                      <div class="input-box hidden">
+                          <span class="icon-chiet-khau"></span>
+                          <span class="text-placeholder">Chiết khấu</span>
+                          <input type="text" id="discount-text" class="input-box-data" placeholder="Chiết khấu" readonly="" style="color:#B0B3B2 !important">
+                      </div>
+                      <div class="input-box hidden">
+                          <span class="icon-so-tien-phai-tra"></span>
+                          <span class="text-placeholder">Số tiền phải trả</span>
+                          <input type="text" id="payment-amount" class="input-box-data" placeholder="Số tiền phải trả" readonly="" style="color:#B0B3B2 !important">
+                      </div>
+                      
+
+                      <div class="input-box">
+                          <ul class="grid-five-column list-money">
+                              <li class="face-value active" value="50000">50.000 đ</li>
+                              <li class="face-value" value="100000">100.000 đ</li>
+                              <li class="face-value" value="150000">150.000 đ</li>
+                              <li class="face-value" value="200000">200.000 đ</li>
+                              <li class="face-value" value="250000">250.000 đ</li>
+                          </ul>
+                      </div>
+                      <div class="input-box pay-method">
+                          <h3 class="title">Phương thức thanh toán</h3>
+                          <div class="input-box">
+                              <!--<span class="icon-arrow-up-select-black"></span>-->
+                              <input id="payment-method" class="input-box-data" type="text" name="category" placeholder="Chọn phương thức thanh toán" value="" readonly="" required="">
+                              <span class="help-block" id="payment-method-error"></span>
+                          </div>
+                      </div>
+                      <div class="input-box">
+                          <div class="form-check hidden">
+                          <input class="form-check-input" type="checkbox" name="token_create" id="token_create">
+                          <label class="form-check-label" for="token_create">
+                              Lưu thẻ cho lần sau thanh toán
+                          </label>
+                          </div>
+                          <div class="form-check">
+                              <input class="form-check-input" type="checkbox" id="gridCheck2">
+                              <label class="form-check-label" for="gridCheck2">
+                              Tôi đã đọc và đồng ý với 
+                              <a href="https://www.mobifone.vn/tien-ich/dieu-khoan-quy-dinh" target="_blank">điều khoản và quy định</a>
+                              </label>
+                          </div>
+                      </div>
+                      <div class="submit-box">
+                          <button id="submit_payment" type="button" class="btn btn-relative-fit" disabled="">Tiếp tục</button>
+                      </div>
+                  </form>
+              </div>
+              
+              <div class="utilities hidden" id="autopay" data-tab-content="">
+                                          <div class="grid-two-column">
+                          <div class="m-card box-item-autopay">
+                              <div class="no-card">
+                                  <div class="image">
+                                      <img src="https://www.mobifone.vn/assets/source/icons/no-card.png">
+                                  </div>
+                                  <div class="des">
+                                      <p>Chưa có thẻ đã lưu nào</p>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                                      <div class="submit-box">
+                      <div class="term_rule">
+                          <a href="https://www.mobifone.vn/tien-ich/dieu-khoan-quy-dinh-autopay" target="_blank">Điều khoản &amp; quy định</a>
+                      </div>
+                      <div class="link-submit">
+                                                  <a data-toggle="modal" data-target="#addCard" class="btn-border-long">Thêm số điện thoại</a>
+                                              <a class="btn-border-long" data-toggle="modal" data-target="#confirm-add-card" target="_blank">Thêm thẻ thanh toán</a>
+                      </div>
+                  </div>
+              </div>
+          </div>
+              
+      </div>
+  </div>
+  <div class="modal fade" id="modalPayment" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+          <div class="modal-content">
+              <span class="close-modal-mb" data-dismiss="modal" aria-label="Close"></span>
+              <div class="modal-body">
+                  <h2 class="title-modalPayment">Chọn phương thức thanh toán</h2>
+                                      <h3 class="title">Thẻ thanh toán quốc tế</h3>
+                  <div class="payment-method-content">
+                      <ul class="list-global-card">
+                          <li class="global-card-item">
+                              <div class="card_payment">
+                                  <img src="https://www.mobifone.vn/assets/source/image/i_visai.svg">
+                                  <input type="hidden" name="show_save_card" value="1">
+                                  <input type="hidden" name="card_type" value="1">
+                                  <input type="hidden" name="card_name" value="VISA">
+                                  <input type="hidden" name="code_bank" value="VISA">
+                                  <input type="hidden" name="merchant_code" value="Visa">
+                                  <input type="hidden" name="bank_gate" value="NAPAS">
+                                  <input type="hidden" name="card_no" value="">
+                              </div>
+                          </li>
+                          <li class="global-card-item">
+                              <div class="card_payment">
+                                  <img src="https://www.mobifone.vn/assets/source/image/i_jcb.svg">
+                                  <input type="hidden" name="show_save_card" value="1">
+                                  <input type="hidden" name="card_type" value="1">
+                                  <input type="hidden" name="card_name" value="JCB">
+                                  <input type="hidden" name="code_bank" value="JCB">
+                                  <input type="hidden" name="merchant_code" value="JCB">
+                                  <input type="hidden" name="bank_gate" value="NAPAS">
+                                  <input type="hidden" name="card_no" value="">
+                              </div>
+                          </li>
+                          <li class="global-card-item">
+                              <div class="card_payment">
+                                  <img src="https://www.mobifone.vn/assets/source/image/i_master_card.svg">
+                                  <input type="hidden" name="show_save_card" value="1">
+                                  <input type="hidden" name="card_type" value="1">
+                                  <input type="hidden" name="card_name" value="MASTER CARD">
+                                  <input type="hidden" name="code_bank" value="MasterCard">
+                                  <input type="hidden" name="merchant_code" value="Mastercard">
+                                  <input type="hidden" name="bank_gate" value="NAPAS">
+                                  <input type="hidden" name="card_no" value="">
+                              </div>
+                          </li>
+                          <li class="global-card-item">
+                              <div class="card_payment">
+                                  <img src="https://www.mobifone.vn/assets/source/image/i_usa_express.svg">
+                                  <input type="hidden" name="show_save_card" value="1">
+                                  <input type="hidden" name="card_type" value="1">
+                                  <input type="hidden" name="card_name" value="AMERICAN EXPRESS">
+                                  <input type="hidden" name="code_bank" value="AMEX">
+                                  <input type="hidden" name="merchant_code" value="Amex">
+                                  <input type="hidden" name="bank_gate" value="NAPAS">
+                                  <input type="hidden" name="card_no" value="">
+                              </div>
+                          </li>
+                      </ul>
+                  </div>
+                  <h3 class="title">Quét mã QR</h3>
+                  <div class="payment-method-content payment-method-qrcode">
+                      <div class="image-qrcode card_payment">
+                          <img src="https://www.mobifone.vn/assets/source/image/btn_qrcode.svg" class="qrcode">
+                          <input type="hidden" name="show_save_card" value="0">
+                          <input type="hidden" name="card_type" value="0">
+                          <input type="hidden" name="card_name" value="VNPAYQR">
+                          <input type="hidden" name="code_bank" value="VNPAYQR">
+                          <input type="hidden" name="merchant_code" value="VNPAYQR">
+                          <input type="hidden" name="bank_gate" value="VNPAYQR">
+                      </div>
+                  </div>
+                  <h3 class="title">Thanh toán ngân hàng</h3>
+                  <div class="payment-method-content list-bank-payment">
+                      <div class="grid-five-column">
+                                                                                              <div class="item-bank card_payment">
+                                      <img src="https://www.mobifone.vn/assets/source/image/banks/bank_20.jpg">
+                                      <input type="hidden" name="show_save_card" value="0">
+                                      <input type="hidden" name="card_type" value="0">
+                                      <input type="hidden" name="card_name" value="Ngân hàng TMCP Ngoại thương Việt Nam">
+                                      <input type="hidden" name="code_bank" value="VCB">
+                                      <input type="hidden" name="merchant_code" value="VCB">
+                                      <input type="hidden" name="bank_gate" value="VCB">
+                                  </div>
+                                                                                                                              <div class="item-bank card_payment">
+                                      <img src="https://www.mobifone.vn/assets/source/image/banks/bank_26.jpg">
+                                      <input type="hidden" name="show_save_card" value="0">
+                                      <input type="hidden" name="card_type" value="0">
+                                      <input type="hidden" name="card_name" value="Ngân hàng Đầu Tư và Phát Triển Việt Nam">
+                                      <input type="hidden" name="code_bank" value="BIDV">
+                                      <input type="hidden" name="merchant_code" value="BIDV">
+                                      <input type="hidden" name="bank_gate" value="BIDV">
+                                  </div>
+                                                                                                                              <div class="item-bank card_payment">
+                                      <img src="https://www.mobifone.vn/assets/source/image/banks/bank_17.jpg">
+                                      <input type="hidden" name="show_save_card" value="0">
+                                      <input type="hidden" name="card_type" value="0">
+                                      <input type="hidden" name="card_name" value="Ngân hàng TMCP Kỹ thương Việt Nam">
+                                      <input type="hidden" name="code_bank" value="TCB">
+                                      <input type="hidden" name="merchant_code" value="TCB">
+                                      <input type="hidden" name="bank_gate" value="TCB">
+                                  </div>
+                                                                                                                              <div class="item-bank card_payment">
+                                      <img src="https://www.mobifone.vn/assets/source/image/banks/bank_15.jpg">
+                                      <input type="hidden" name="show_save_card" value="0">
+                                      <input type="hidden" name="card_type" value="0">
+                                      <input type="hidden" name="card_name" value="Ngân hàng TMCP Sài Gòn Thương Tín">
+                                      <input type="hidden" name="code_bank" value="STB">
+                                      <input type="hidden" name="merchant_code" value="STB">
+                                      <input type="hidden" name="bank_gate" value="STB">
+                                  </div>
+                                                                                                                              <div class="item-bank card_payment">
+                                      <img src="https://www.mobifone.vn/assets/source/image/banks/bank_23.jpg">
+                                      <input type="hidden" name="show_save_card" value="0">
+                                      <input type="hidden" name="card_type" value="0">
+                                      <input type="hidden" name="card_name" value="Ngân hàng TMCP Việt Nam Thịnh Vượng">
+                                      <input type="hidden" name="code_bank" value="VPB">
+                                      <input type="hidden" name="merchant_code" value="VPB">
+                                      <input type="hidden" name="bank_gate" value="VPB">
+                                  </div>
+                                                                                                                              <div class="item-bank card_payment">
+                                      <img src="https://www.mobifone.vn/assets/source/image/banks/bank_21.jpg">
+                                      <input type="hidden" name="show_save_card" value="0">
+                                      <input type="hidden" name="card_type" value="0">
+                                      <input type="hidden" name="card_name" value="Ngân hàng TMCP Quốc tế">
+                                      <input type="hidden" name="code_bank" value="VIB">
+                                      <input type="hidden" name="merchant_code" value="VIB">
+                                      <input type="hidden" name="bank_gate" value="VIB">
+                                  </div>
+                                                                                                                              <div class="item-bank card_payment">
+                                      <img src="https://www.mobifone.vn/assets/source/image/banks/bank_2.jpg">
+                                      <input type="hidden" name="show_save_card" value="0">
+                                      <input type="hidden" name="card_type" value="0">
+                                      <input type="hidden" name="card_name" value="Ngân hàng Á Châu">
+                                      <input type="hidden" name="code_bank" value="ACB">
+                                      <input type="hidden" name="merchant_code" value="ACB">
+                                      <input type="hidden" name="bank_gate" value="ACB">
+                                  </div>
+                                                                                                                              <div class="item-bank card_payment">
+                                      <img src="https://www.mobifone.vn/assets/source/image/banks/bank_18.jpg">
+                                      <input type="hidden" name="show_save_card" value="0">
+                                      <input type="hidden" name="card_type" value="0">
+                                      <input type="hidden" name="card_name" value="Ngân hàng TMCP Tiên Phong">
+                                      <input type="hidden" name="code_bank" value="TPB">
+                                      <input type="hidden" name="merchant_code" value="TPB">
+                                      <input type="hidden" name="bank_gate" value="TPB">
+                                  </div>
+                                                                                                                              <div class="item-bank card_payment">
+                                      <img src="https://www.mobifone.vn/assets/source/image/banks/bank_1.jpg">
+                                      <input type="hidden" name="show_save_card" value="0">
+                                      <input type="hidden" name="card_type" value="0">
+                                      <input type="hidden" name="card_name" value="Ngân hàng TMCP An Bình">
+                                      <input type="hidden" name="code_bank" value="ABB">
+                                      <input type="hidden" name="merchant_code" value="ABBANK">
+                                      <input type="hidden" name="bank_gate" value="ABBANK">
+                                  </div>
+                                                                                                                              <div class="item-bank card_payment">
+                                      <img src="https://www.mobifone.vn/assets/source/image/banks/bank_37.jpg">
+                                      <input type="hidden" name="show_save_card" value="0">
+                                      <input type="hidden" name="card_type" value="0">
+                                      <input type="hidden" name="card_name" value="Ngân hàng Nông nghiệp và Phát triển Nông thôn Việt Nam">
+                                      <input type="hidden" name="code_bank" value="AGRIBANK">
+                                      <input type="hidden" name="merchant_code" value="AGRIBANK">
+                                      <input type="hidden" name="bank_gate" value="AGRIBANK">
+                                  </div>
+                                                                                                                              <div class="item-bank card_payment">
+                                      <img src="https://www.mobifone.vn/assets/source/image/banks/bank_3.jpg">
+                                      <input type="hidden" name="show_save_card" value="0">
+                                      <input type="hidden" name="card_type" value="0">
+                                      <input type="hidden" name="card_name" value="Ngân hàng TMCP Bảo Việt">
+                                      <input type="hidden" name="code_bank" value="BVB">
+                                      <input type="hidden" name="merchant_code" value="BVB">
+                                      <input type="hidden" name="bank_gate" value="BVB">
+                                  </div>
+                                                                                                                              <div class="item-bank card_payment">
+                                      <img src="https://www.mobifone.vn/assets/source/image/banks/bank_4.jpg">
+                                      <input type="hidden" name="show_save_card" value="0">
+                                      <input type="hidden" name="card_type" value="0">
+                                      <input type="hidden" name="card_name" value="Ngân hàng TMCP Xuất nhập khẩu Việt Nam">
+                                      <input type="hidden" name="code_bank" value="EIB">
+                                      <input type="hidden" name="merchant_code" value="EIB">
+                                      <input type="hidden" name="bank_gate" value="EIB">
+                                  </div>
+                                                                                                                              <div class="item-bank card_payment">
+                                      <img src="https://www.mobifone.vn/assets/source/image/banks/bank_5.jpg">
+                                      <input type="hidden" name="show_save_card" value="0">
+                                      <input type="hidden" name="card_type" value="0">
+                                      <input type="hidden" name="card_name" value="Ngân hàng TMCP Dầu khí toàn cầu">
+                                      <input type="hidden" name="code_bank" value="GPB">
+                                      <input type="hidden" name="merchant_code" value="GPB">
+                                      <input type="hidden" name="bank_gate" value="GPB">
+                                  </div>
+                                                                                                                              <div class="item-bank card_payment">
+                                      <img src="https://www.mobifone.vn/assets/source/image/banks/bank_6.jpg">
+                                      <input type="hidden" name="show_save_card" value="0">
+                                      <input type="hidden" name="card_type" value="0">
+                                      <input type="hidden" name="card_name" value="Ngân hàng TMCP Phát triển nhà TP.HCM">
+                                      <input type="hidden" name="code_bank" value="HDB">
+                                      <input type="hidden" name="merchant_code" value="HDB">
+                                      <input type="hidden" name="bank_gate" value="HDB">
+                                  </div>
+                                                                                                                              <div class="item-bank card_payment">
+                                      <img src="https://www.mobifone.vn/assets/source/image/banks/bank_7.jpg">
+                                      <input type="hidden" name="show_save_card" value="0">
+                                      <input type="hidden" name="card_type" value="0">
+                                      <input type="hidden" name="card_name" value="Ngân hàng TNHH Indovina">
+                                      <input type="hidden" name="code_bank" value="IVB">
+                                      <input type="hidden" name="merchant_code" value="IVB">
+                                      <input type="hidden" name="bank_gate" value="IVB">
+                                  </div>
+                                                                                                                              <div class="item-bank card_payment">
+                                      <img src="https://www.mobifone.vn/assets/source/image/banks/bank_40.jpg">
+                                      <input type="hidden" name="show_save_card" value="0">
+                                      <input type="hidden" name="card_type" value="0">
+                                      <input type="hidden" name="card_name" value="Ngân hàng TMCP Kiên Long">
+                                      <input type="hidden" name="code_bank" value="KIENLONGBANK">
+                                      <input type="hidden" name="merchant_code" value="KLB">
+                                      <input type="hidden" name="bank_gate" value="KLB">
+                                  </div>
+                                                                                                                              <div class="item-bank card_payment">
+                                      <img src="https://www.mobifone.vn/assets/source/image/banks/bank_30.jpg">
+                                      <input type="hidden" name="show_save_card" value="0">
+                                      <input type="hidden" name="card_type" value="0">
+                                      <input type="hidden" name="card_name" value="Ngân hàng TMCP Bưu điện Liên Việt ">
+                                      <input type="hidden" name="code_bank" value="LIENVIETBANK">
+                                      <input type="hidden" name="merchant_code" value="LPB">
+                                      <input type="hidden" name="bank_gate" value="LPB">
+                                  </div>
+                                                                                                                              <div class="item-bank card_payment">
+                                      <img src="https://www.mobifone.vn/assets/source/image/banks/bank_8.jpg">
+                                      <input type="hidden" name="show_save_card" value="0">
+                                      <input type="hidden" name="card_type" value="0">
+                                      <input type="hidden" name="card_name" value="Ngân hàng TMCP Quân Đội">
+                                      <input type="hidden" name="code_bank" value="MB">
+                                      <input type="hidden" name="merchant_code" value="MB">
+                                      <input type="hidden" name="bank_gate" value="MB">
+                                  </div>
+                                                                                                                              <div class="item-bank card_payment">
+                                      <img src="https://www.mobifone.vn/assets/source/image/banks/bank_9.jpg">
+                                      <input type="hidden" name="show_save_card" value="0">
+                                      <input type="hidden" name="card_type" value="0">
+                                      <input type="hidden" name="card_name" value="NH TMCP Hàng Hải">
+                                      <input type="hidden" name="code_bank" value="MSB">
+                                      <input type="hidden" name="merchant_code" value="MSB">
+                                      <input type="hidden" name="bank_gate" value="MSB">
+                                  </div>
+                                                                                                                              <div class="item-bank card_payment">
+                                      <img src="https://www.mobifone.vn/assets/source/image/banks/bank_39.jpg">
+                                      <input type="hidden" name="show_save_card" value="0">
+                                      <input type="hidden" name="card_type" value="0">
+                                      <input type="hidden" name="card_name" value="Ngân hàng TMCP Nam Á">
+                                      <input type="hidden" name="code_bank" value="NAMABANK">
+                                      <input type="hidden" name="merchant_code" value="NAMABANK">
+                                      <input type="hidden" name="bank_gate" value="NAMABANK">
+                                  </div>
+                                                                                                                              <div class="item-bank card_payment">
+                                      <img src="https://www.mobifone.vn/assets/source/image/banks/bank_24.jpg">
+                                      <input type="hidden" name="show_save_card" value="0">
+                                      <input type="hidden" name="card_type" value="0">
+                                      <input type="hidden" name="card_name" value="Ngân hàng TMCP  Bắc Á">
+                                      <input type="hidden" name="code_bank" value="NASB">
+                                      <input type="hidden" name="merchant_code" value="NASB">
+                                      <input type="hidden" name="bank_gate" value="NASB">
+                                  </div>
+                                                                                                                              <div class="item-bank card_payment">
+                                      <img src="https://www.mobifone.vn/assets/source/image/banks/bank_38.jpg">
+                                      <input type="hidden" name="show_save_card" value="0">
+                                      <input type="hidden" name="card_type" value="0">
+                                      <input type="hidden" name="card_name" value="Ngân hàng TMCP Quốc Dân">
+                                      <input type="hidden" name="code_bank" value="NCB">
+                                      <input type="hidden" name="merchant_code" value="NCB">
+                                      <input type="hidden" name="bank_gate" value="NCB">
+                                  </div>
+                                                                                                                              <div class="item-bank card_payment">
+                                      <img src="https://www.mobifone.vn/assets/source/image/banks/bank_25.jpg">
+                                      <input type="hidden" name="show_save_card" value="0">
+                                      <input type="hidden" name="card_type" value="0">
+                                      <input type="hidden" name="card_name" value="Ngân hàng Phương Đông">
+                                      <input type="hidden" name="code_bank" value="OCB">
+                                      <input type="hidden" name="merchant_code" value="OCB">
+                                      <input type="hidden" name="bank_gate" value="OCB">
+                                  </div>
+                                                                                                                              <div class="item-bank card_payment">
+                                      <img src="https://www.mobifone.vn/assets/source/image/banks/bank_31.jpg">
+                                      <input type="hidden" name="show_save_card" value="0">
+                                      <input type="hidden" name="card_type" value="0">
+                                      <input type="hidden" name="card_name" value="Ngan hang OceanBank">
+                                      <input type="hidden" name="code_bank" value="OJB">
+                                      <input type="hidden" name="merchant_code" value="OJB">
+                                      <input type="hidden" name="bank_gate" value="OJB">
+                                  </div>
+                                                                                                                              <div class="item-bank card_payment">
+                                      <img src="https://www.mobifone.vn/assets/source/image/banks/bank_42.jpg">
+                                      <input type="hidden" name="show_save_card" value="0">
+                                      <input type="hidden" name="card_type" value="0">
+                                      <input type="hidden" name="card_name" value="Public Bank Viet Nam">
+                                      <input type="hidden" name="code_bank" value="PBVN">
+                                      <input type="hidden" name="merchant_code" value="PBVN">
+                                      <input type="hidden" name="bank_gate" value="PBVN">
+                                  </div>
+                                                                                                                              <div class="item-bank card_payment">
+                                      <img src="https://www.mobifone.vn/assets/source/image/banks/bank_43.jpg">
+                                      <input type="hidden" name="show_save_card" value="0">
+                                      <input type="hidden" name="card_type" value="0">
+                                      <input type="hidden" name="card_name" value="PV Combank">
+                                      <input type="hidden" name="code_bank" value="PVCB">
+                                      <input type="hidden" name="merchant_code" value="PVCB">
+                                      <input type="hidden" name="bank_gate" value="PVCB">
+                                  </div>
+                                                                                                                              <div class="item-bank card_payment">
+                                      <img src="https://www.mobifone.vn/assets/source/image/banks/bank_12.jpg">
+                                      <input type="hidden" name="show_save_card" value="0">
+                                      <input type="hidden" name="card_type" value="0">
+                                      <input type="hidden" name="card_name" value="Ngân hàng TMCP Sài Gòn">
+                                      <input type="hidden" name="code_bank" value="SCB">
+                                      <input type="hidden" name="merchant_code" value="SCB">
+                                      <input type="hidden" name="bank_gate" value="SCB">
+                                  </div>
+                                                                                                                              <div class="item-bank card_payment">
+                                      <img src="https://www.mobifone.vn/assets/source/image/banks/bank_14.jpg">
+                                      <input type="hidden" name="show_save_card" value="0">
+                                      <input type="hidden" name="card_type" value="0">
+                                      <input type="hidden" name="card_name" value="Ngân hàng TMCP Đông Nam Á">
+                                      <input type="hidden" name="code_bank" value="SEAB">
+                                      <input type="hidden" name="merchant_code" value="SEAB">
+                                      <input type="hidden" name="bank_gate" value="SEAB">
+                                  </div>
+                                                                                                                              <div class="item-bank card_payment">
+                                      <img src="https://www.mobifone.vn/assets/source/image/banks/bank_13.jpg">
+                                      <input type="hidden" name="show_save_card" value="0">
+                                      <input type="hidden" name="card_type" value="0">
+                                      <input type="hidden" name="card_name" value="NHTMCP Sài Gòn Hà Nội">
+                                      <input type="hidden" name="code_bank" value="SHB">
+                                      <input type="hidden" name="merchant_code" value="SHB">
+                                      <input type="hidden" name="bank_gate" value="SHB">
+                                  </div>
+                                                                                                                              <div class="item-bank card_payment">
+                                      <img src="https://www.mobifone.vn/assets/source/image/banks/bank_19.jpg">
+                                      <input type="hidden" name="show_save_card" value="0">
+                                      <input type="hidden" name="card_type" value="0">
+                                      <input type="hidden" name="card_name" value="Ngân hàng TMCP Việt Á">
+                                      <input type="hidden" name="code_bank" value="VAB">
+                                      <input type="hidden" name="merchant_code" value="VAB">
+                                      <input type="hidden" name="bank_gate" value="VAB">
+                                  </div>
+                                                                                                                              <div class="item-bank card_payment">
+                                      <img src="https://www.mobifone.vn/assets/source/image/banks/bank_27.jpg">
+                                      <input type="hidden" name="show_save_card" value="0">
+                                      <input type="hidden" name="card_type" value="0">
+                                      <input type="hidden" name="card_name" value="Ngân hàng Công Thương Việt Nam">
+                                      <input type="hidden" name="code_bank" value="VIETINBANK">
+                                      <input type="hidden" name="merchant_code" value="VIETINBANK">
+                                      <input type="hidden" name="bank_gate" value="VIETINBANK">
+                                  </div>
+                                                                                                                              <div class="item-bank card_payment">
+                                      <img src="https://www.mobifone.vn/assets/source/image/banks/bank_32.jpg">
+                                      <input type="hidden" name="show_save_card" value="0">
+                                      <input type="hidden" name="card_type" value="0">
+                                      <input type="hidden" name="card_name" value="Vi dien tu VnMart">
+                                      <input type="hidden" name="code_bank" value="VNMART">
+                                      <input type="hidden" name="merchant_code" value="VNMART">
+                                      <input type="hidden" name="bank_gate" value="VNMART">
+                                  </div>
+                                                                                                                                                                                          <div class="item-bank card_payment">
+                                      <img src="https://www.mobifone.vn/assets/source/image/banks/bank_41.jpg">
+                                      <input type="hidden" name="show_save_card" value="0">
+                                      <input type="hidden" name="card_type" value="0">
+                                      <input type="hidden" name="card_name" value="Ngân hàng liên doanh Việt Nga">
+                                      <input type="hidden" name="code_bank" value="VRB">
+                                      <input type="hidden" name="merchant_code" value="VRB">
+                                      <input type="hidden" name="bank_gate" value="VRB">
+                                  </div>
+                                                                                  </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="modal fade" id="modalOTP" style="display: none;" tabindex="-2" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+              <div class="modal-body">
+                  <h3 class="title">Nhập mã xác nhận</h3>
+                  <p>Mã xác nhận 6 chữ số chúng tôi đã gửi đến số điện thoại: <strong id="phone_input_data">0787703994</strong></p>
+                  <form id="do-otp-form" class="digit-group" data-group-name="digits" data-autosubmit="false" autocomplete="off">
+                      <input id="phone_input" type="hidden" name="phone" value="787703994" maxlength="1">
+                      <input class="add-number-otp" data-index="1" type="number" placeholder="-" id="digit-1" name="digit-1" data-next="digit-2" maxlength="1">
+                      <input class="add-number-otp" data-index="2" type="number" placeholder="-" id="digit-2" name="digit-2" data-next="digit-3" data-previous="digit-1" maxlength="1">
+                      <input class="add-number-otp" data-index="3" type="number" placeholder="-" id="digit-3" name="digit-3" data-next="digit-4" data-previous="digit-2" maxlength="1">
+                      <input class="add-number-otp" data-index="4" type="number" placeholder="-" id="digit-4" name="digit-4" data-next="digit-5" data-previous="digit-3" maxlength="1">
+                      <input class="add-number-otp" data-index="5" type="number" placeholder="-" id="digit-5" name="digit-5" data-next="digit-6" data-previous="digit-4" maxlength="1">
+                      <input class="add-number-otp" data-index="6" type="number" placeholder="-" id="digit-6" name="digit-6" data-previous="digit-5" maxlength="1">
+                  </form>
+                  <span class="help-block" id="do-login-error"></span>
+                  <div class="resend-otp" style="display: none">
+                      <a id="resend-otp-factor" data-toggle="modal" data-target="#modalOTP">Gửi lại mã OTP</a>
+                  </div>
+                  <a class="btn-border submit-number-otp" post-url="https://www.mobifone.vn/tai-khoan/check-otp-factor" id="do-validate-factor">Xác nhận</a>
+                  <span class="count-down-block time-expired" id="count_down"></span>
+              </div>
+          </div>
+      </div>
+  </div>
+</main>
+
+
+// wait element userInfoBox to sure that we login successful already.
+                // driver.wait(until.elementLocated(By.id('cancel_init_password')), 5 * 1000).then(
+                //     cancel_init_password => {
+                //         cancel_init_password.click()
+                //         console.log("click cancel_init_password done!")
+                //         driver.get('https://www.mobifone.vn/tien-ich?hinh-thuc=nap-tien')
+                //         console.log("navigate naptien page done!")
+                //         driver.findElement(By.className('menu-item')).click()
+                //         console.log("click menu-item done!")
+                //         const input = driver.findElement(By.name('card_id')).sendKeys('123456')
+                //         console.log(input)
+                //     }
+                // )
+
+                <html lang="vi"><head><script type="text/javascript">
+                    (function() {
+                      var container = document.querySelector('#_tcx-wb6dfwysr0e');
+                      if (!container) {
+                        return;
+                      }
+                
+                      function addToContainer(url, text) {
+                        const wrapper = document.createElement('div');
+                        wrapper.setAttribute('data-tcx-url', url);
+                        wrapper.innerText = text;
+                        container.appendChild(wrapper);
+                      }
+                
+                      const fetch = window.fetch
+                      window.fetch = function() {
+                        return Promise.resolve(fetch.apply(window, arguments))
+                            .then(async response => {
+                              if (response.ok) {
+                                try {
+                                  const clone = response.clone();
+                                  const json = await clone.json();
+                                  addToContainer(clone.url, JSON.stringify(json));
+                                } catch (err) {}
+                              }
+                              return response;
+                            });
+                      };
+                
+                      var XHR = XMLHttpRequest.prototype;
+                      var send = XHR.send;
+                      var open = XHR.open;
+                      XHR.open = function(method, url) {
+                        this.url = url;
+                        return open.apply(this, arguments);
+                      };
+                      XHR.send = function() {
+                        this.addEventListener('load', function() {
+                          try {
+                            const response = this.response;
+                            if (response && response.length) {
+                              const firstChar = response[0];
+                              if (firstChar === '[' || firstChar === '{') {
+                                addToContainer(this.url, response);
+                              }
+                            }
+                          } catch (err) {
+                            // No-op.
+                          }
+                        });
+                        return send.apply(this, arguments);
+                      };
+                    })();
+                  </script>
+                    <meta charset="utf-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+                    
+                    <title>MobiFone - Đăng nhập bằng OTP</title>
+                    <link rel="shortcut icon" href="https://www.mobifone.vn/assets/source/icons/mobifone_favicon.png">
+                    
+                    <!-- Fonts -->
+                    <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+                    <!-- Fonts -->
+                <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+                <link href="https://www.mobifone.vn/assets/css/main.min.css?v=1.41" rel="stylesheet">
+                <!-- Global site tag (gtag.js) - Google Analytics -->
+                <script type="text/javascript" async="" src="https://www.gstatic.com/recaptcha/releases/BycHQdSIhzR_1EcOLw2mOzYQ/recaptcha__en.js" crossorigin="anonymous" integrity="sha384-CBseaeeBL63Ovo8Nn/7Kb8uMCUb9/SGDK8ZbOQuvJZG+Sk6CQ+r5Eovq3l7gHyte"></script><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-264T1DGNX1"></script>
+                <script>
+                 window.dataLayer = window.dataLayer || [];
+                 function gtag(){dataLayer.push(arguments);}
+                 gtag('js', new Date());
+                 
+                 gtag('config', 'G-264T1DGNX1');
+                </script>
+                <style>@-webkit-keyframes swal2-show{0%{-webkit-transform:scale(.7);transform:scale(.7)}45%{-webkit-transform:scale(1.05);transform:scale(1.05)}80%{-webkit-transform:scale(.95);transform:scale(.95)}100%{-webkit-transform:scale(1);transform:scale(1)}}@keyframes swal2-show{0%{-webkit-transform:scale(.7);transform:scale(.7)}45%{-webkit-transform:scale(1.05);transform:scale(1.05)}80%{-webkit-transform:scale(.95);transform:scale(.95)}100%{-webkit-transform:scale(1);transform:scale(1)}}@-webkit-keyframes swal2-hide{0%{-webkit-transform:scale(1);transform:scale(1);opacity:1}100%{-webkit-transform:scale(.5);transform:scale(.5);opacity:0}}@keyframes swal2-hide{0%{-webkit-transform:scale(1);transform:scale(1);opacity:1}100%{-webkit-transform:scale(.5);transform:scale(.5);opacity:0}}@-webkit-keyframes swal2-animate-success-line-tip{0%{top:1.1875em;left:.0625em;width:0}54%{top:1.0625em;left:.125em;width:0}70%{top:2.1875em;left:-.375em;width:3.125em}84%{top:3em;left:1.3125em;width:1.0625em}100%{top:2.8125em;left:.875em;width:1.5625em}}@keyframes swal2-animate-success-line-tip{0%{top:1.1875em;left:.0625em;width:0}54%{top:1.0625em;left:.125em;width:0}70%{top:2.1875em;left:-.375em;width:3.125em}84%{top:3em;left:1.3125em;width:1.0625em}100%{top:2.8125em;left:.875em;width:1.5625em}}@-webkit-keyframes swal2-animate-success-line-long{0%{top:3.375em;right:2.875em;width:0}65%{top:3.375em;right:2.875em;width:0}84%{top:2.1875em;right:0;width:3.4375em}100%{top:2.375em;right:.5em;width:2.9375em}}@keyframes swal2-animate-success-line-long{0%{top:3.375em;right:2.875em;width:0}65%{top:3.375em;right:2.875em;width:0}84%{top:2.1875em;right:0;width:3.4375em}100%{top:2.375em;right:.5em;width:2.9375em}}@-webkit-keyframes swal2-rotate-success-circular-line{0%{-webkit-transform:rotate(-45deg);transform:rotate(-45deg)}5%{-webkit-transform:rotate(-45deg);transform:rotate(-45deg)}12%{-webkit-transform:rotate(-405deg);transform:rotate(-405deg)}100%{-webkit-transform:rotate(-405deg);transform:rotate(-405deg)}}@keyframes swal2-rotate-success-circular-line{0%{-webkit-transform:rotate(-45deg);transform:rotate(-45deg)}5%{-webkit-transform:rotate(-45deg);transform:rotate(-45deg)}12%{-webkit-transform:rotate(-405deg);transform:rotate(-405deg)}100%{-webkit-transform:rotate(-405deg);transform:rotate(-405deg)}}@-webkit-keyframes swal2-animate-error-x-mark{0%{margin-top:1.625em;-webkit-transform:scale(.4);transform:scale(.4);opacity:0}50%{margin-top:1.625em;-webkit-transform:scale(.4);transform:scale(.4);opacity:0}80%{margin-top:-.375em;-webkit-transform:scale(1.15);transform:scale(1.15)}100%{margin-top:0;-webkit-transform:scale(1);transform:scale(1);opacity:1}}@keyframes swal2-animate-error-x-mark{0%{margin-top:1.625em;-webkit-transform:scale(.4);transform:scale(.4);opacity:0}50%{margin-top:1.625em;-webkit-transform:scale(.4);transform:scale(.4);opacity:0}80%{margin-top:-.375em;-webkit-transform:scale(1.15);transform:scale(1.15)}100%{margin-top:0;-webkit-transform:scale(1);transform:scale(1);opacity:1}}@-webkit-keyframes swal2-animate-error-icon{0%{-webkit-transform:rotateX(100deg);transform:rotateX(100deg);opacity:0}100%{-webkit-transform:rotateX(0);transform:rotateX(0);opacity:1}}@keyframes swal2-animate-error-icon{0%{-webkit-transform:rotateX(100deg);transform:rotateX(100deg);opacity:0}100%{-webkit-transform:rotateX(0);transform:rotateX(0);opacity:1}}body.swal2-toast-shown .swal2-container{position:fixed;background-color:transparent}body.swal2-toast-shown .swal2-container.swal2-shown{background-color:transparent}body.swal2-toast-shown .swal2-container.swal2-top{top:0;right:auto;bottom:auto;left:50%;-webkit-transform:translateX(-50%);transform:translateX(-50%)}body.swal2-toast-shown .swal2-container.swal2-top-end,body.swal2-toast-shown .swal2-container.swal2-top-right{top:0;right:0;bottom:auto;left:auto}body.swal2-toast-shown .swal2-container.swal2-top-left,body.swal2-toast-shown .swal2-container.swal2-top-start{top:0;right:auto;bottom:auto;left:0}body.swal2-toast-shown .swal2-container.swal2-center-left,body.swal2-toast-shown .swal2-container.swal2-center-start{top:50%;right:auto;bottom:auto;left:0;-webkit-transform:translateY(-50%);transform:translateY(-50%)}body.swal2-toast-shown .swal2-container.swal2-center{top:50%;right:auto;bottom:auto;left:50%;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%)}body.swal2-toast-shown .swal2-container.swal2-center-end,body.swal2-toast-shown .swal2-container.swal2-center-right{top:50%;right:0;bottom:auto;left:auto;-webkit-transform:translateY(-50%);transform:translateY(-50%)}body.swal2-toast-shown .swal2-container.swal2-bottom-left,body.swal2-toast-shown .swal2-container.swal2-bottom-start{top:auto;right:auto;bottom:0;left:0}body.swal2-toast-shown .swal2-container.swal2-bottom{top:auto;right:auto;bottom:0;left:50%;-webkit-transform:translateX(-50%);transform:translateX(-50%)}body.swal2-toast-shown .swal2-container.swal2-bottom-end,body.swal2-toast-shown .swal2-container.swal2-bottom-right{top:auto;right:0;bottom:0;left:auto}body.swal2-toast-column .swal2-toast{flex-direction:column;align-items:stretch}body.swal2-toast-column .swal2-toast .swal2-actions{flex:1;align-self:stretch;height:2.2em;margin-top:.3125em}body.swal2-toast-column .swal2-toast .swal2-loading{justify-content:center}body.swal2-toast-column .swal2-toast .swal2-input{height:2em;margin:.3125em auto;font-size:1em}body.swal2-toast-column .swal2-toast .swal2-validationerror{font-size:1em}.swal2-popup.swal2-toast{flex-direction:row;align-items:center;width:auto;padding:.625em;box-shadow:0 0 .625em #d9d9d9;overflow-y:hidden}.swal2-popup.swal2-toast .swal2-header{flex-direction:row}.swal2-popup.swal2-toast .swal2-title{flex-grow:1;justify-content:flex-start;margin:0 .6em;font-size:1em}.swal2-popup.swal2-toast .swal2-footer{margin:.5em 0 0;padding:.5em 0 0;font-size:.8em}.swal2-popup.swal2-toast .swal2-close{position:initial;width:.8em;height:.8em;line-height:.8}.swal2-popup.swal2-toast .swal2-content{justify-content:flex-start;font-size:1em}.swal2-popup.swal2-toast .swal2-icon{width:2em;min-width:2em;height:2em;margin:0}.swal2-popup.swal2-toast .swal2-icon-text{font-size:2em;font-weight:700;line-height:1em}.swal2-popup.swal2-toast .swal2-icon.swal2-success .swal2-success-ring{width:2em;height:2em}.swal2-popup.swal2-toast .swal2-icon.swal2-error [class^=swal2-x-mark-line]{top:.875em;width:1.375em}.swal2-popup.swal2-toast .swal2-icon.swal2-error [class^=swal2-x-mark-line][class$=left]{left:.3125em}.swal2-popup.swal2-toast .swal2-icon.swal2-error [class^=swal2-x-mark-line][class$=right]{right:.3125em}.swal2-popup.swal2-toast .swal2-actions{height:auto;margin:0 .3125em}.swal2-popup.swal2-toast .swal2-styled{margin:0 .3125em;padding:.3125em .625em;font-size:1em}.swal2-popup.swal2-toast .swal2-styled:focus{box-shadow:0 0 0 .0625em #fff,0 0 0 .125em rgba(50,100,150,.4)}.swal2-popup.swal2-toast .swal2-success{border-color:#a5dc86}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-circular-line]{position:absolute;width:2em;height:2.8125em;-webkit-transform:rotate(45deg);transform:rotate(45deg);border-radius:50%}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-circular-line][class$=left]{top:-.25em;left:-.9375em;-webkit-transform:rotate(-45deg);transform:rotate(-45deg);-webkit-transform-origin:2em 2em;transform-origin:2em 2em;border-radius:4em 0 0 4em}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-circular-line][class$=right]{top:-.25em;left:.9375em;-webkit-transform-origin:0 2em;transform-origin:0 2em;border-radius:0 4em 4em 0}.swal2-popup.swal2-toast .swal2-success .swal2-success-ring{width:2em;height:2em}.swal2-popup.swal2-toast .swal2-success .swal2-success-fix{top:0;left:.4375em;width:.4375em;height:2.6875em}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-line]{height:.3125em}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-line][class$=tip]{top:1.125em;left:.1875em;width:.75em}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-line][class$=long]{top:.9375em;right:.1875em;width:1.375em}.swal2-popup.swal2-toast.swal2-show{-webkit-animation:showSweetToast .5s;animation:showSweetToast .5s}.swal2-popup.swal2-toast.swal2-hide{-webkit-animation:hideSweetToast .2s forwards;animation:hideSweetToast .2s forwards}.swal2-popup.swal2-toast .swal2-animate-success-icon .swal2-success-line-tip{-webkit-animation:animate-toast-success-tip .75s;animation:animate-toast-success-tip .75s}.swal2-popup.swal2-toast .swal2-animate-success-icon .swal2-success-line-long{-webkit-animation:animate-toast-success-long .75s;animation:animate-toast-success-long .75s}@-webkit-keyframes showSweetToast{0%{-webkit-transform:translateY(-.625em) rotateZ(2deg);transform:translateY(-.625em) rotateZ(2deg);opacity:0}33%{-webkit-transform:translateY(0) rotateZ(-2deg);transform:translateY(0) rotateZ(-2deg);opacity:.5}66%{-webkit-transform:translateY(.3125em) rotateZ(2deg);transform:translateY(.3125em) rotateZ(2deg);opacity:.7}100%{-webkit-transform:translateY(0) rotateZ(0);transform:translateY(0) rotateZ(0);opacity:1}}@keyframes showSweetToast{0%{-webkit-transform:translateY(-.625em) rotateZ(2deg);transform:translateY(-.625em) rotateZ(2deg);opacity:0}33%{-webkit-transform:translateY(0) rotateZ(-2deg);transform:translateY(0) rotateZ(-2deg);opacity:.5}66%{-webkit-transform:translateY(.3125em) rotateZ(2deg);transform:translateY(.3125em) rotateZ(2deg);opacity:.7}100%{-webkit-transform:translateY(0) rotateZ(0);transform:translateY(0) rotateZ(0);opacity:1}}@-webkit-keyframes hideSweetToast{0%{opacity:1}33%{opacity:.5}100%{-webkit-transform:rotateZ(1deg);transform:rotateZ(1deg);opacity:0}}@keyframes hideSweetToast{0%{opacity:1}33%{opacity:.5}100%{-webkit-transform:rotateZ(1deg);transform:rotateZ(1deg);opacity:0}}@-webkit-keyframes animate-toast-success-tip{0%{top:.5625em;left:.0625em;width:0}54%{top:.125em;left:.125em;width:0}70%{top:.625em;left:-.25em;width:1.625em}84%{top:1.0625em;left:.75em;width:.5em}100%{top:1.125em;left:.1875em;width:.75em}}@keyframes animate-toast-success-tip{0%{top:.5625em;left:.0625em;width:0}54%{top:.125em;left:.125em;width:0}70%{top:.625em;left:-.25em;width:1.625em}84%{top:1.0625em;left:.75em;width:.5em}100%{top:1.125em;left:.1875em;width:.75em}}@-webkit-keyframes animate-toast-success-long{0%{top:1.625em;right:1.375em;width:0}65%{top:1.25em;right:.9375em;width:0}84%{top:.9375em;right:0;width:1.125em}100%{top:.9375em;right:.1875em;width:1.375em}}@keyframes animate-toast-success-long{0%{top:1.625em;right:1.375em;width:0}65%{top:1.25em;right:.9375em;width:0}84%{top:.9375em;right:0;width:1.125em}100%{top:.9375em;right:.1875em;width:1.375em}}body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown){overflow-y:hidden}body.swal2-height-auto{height:auto!important}body.swal2-no-backdrop .swal2-shown{top:auto;right:auto;bottom:auto;left:auto;background-color:transparent}body.swal2-no-backdrop .swal2-shown>.swal2-modal{box-shadow:0 0 10px rgba(0,0,0,.4)}body.swal2-no-backdrop .swal2-shown.swal2-top{top:0;left:50%;-webkit-transform:translateX(-50%);transform:translateX(-50%)}body.swal2-no-backdrop .swal2-shown.swal2-top-left,body.swal2-no-backdrop .swal2-shown.swal2-top-start{top:0;left:0}body.swal2-no-backdrop .swal2-shown.swal2-top-end,body.swal2-no-backdrop .swal2-shown.swal2-top-right{top:0;right:0}body.swal2-no-backdrop .swal2-shown.swal2-center{top:50%;left:50%;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%)}body.swal2-no-backdrop .swal2-shown.swal2-center-left,body.swal2-no-backdrop .swal2-shown.swal2-center-start{top:50%;left:0;-webkit-transform:translateY(-50%);transform:translateY(-50%)}body.swal2-no-backdrop .swal2-shown.swal2-center-end,body.swal2-no-backdrop .swal2-shown.swal2-center-right{top:50%;right:0;-webkit-transform:translateY(-50%);transform:translateY(-50%)}body.swal2-no-backdrop .swal2-shown.swal2-bottom{bottom:0;left:50%;-webkit-transform:translateX(-50%);transform:translateX(-50%)}body.swal2-no-backdrop .swal2-shown.swal2-bottom-left,body.swal2-no-backdrop .swal2-shown.swal2-bottom-start{bottom:0;left:0}body.swal2-no-backdrop .swal2-shown.swal2-bottom-end,body.swal2-no-backdrop .swal2-shown.swal2-bottom-right{right:0;bottom:0}.swal2-container{display:flex;position:fixed;top:0;right:0;bottom:0;left:0;flex-direction:row;align-items:center;justify-content:center;padding:10px;background-color:transparent;z-index:1060;overflow-x:hidden;-webkit-overflow-scrolling:touch}.swal2-container.swal2-top{align-items:flex-start}.swal2-container.swal2-top-left,.swal2-container.swal2-top-start{align-items:flex-start;justify-content:flex-start}.swal2-container.swal2-top-end,.swal2-container.swal2-top-right{align-items:flex-start;justify-content:flex-end}.swal2-container.swal2-center{align-items:center}.swal2-container.swal2-center-left,.swal2-container.swal2-center-start{align-items:center;justify-content:flex-start}.swal2-container.swal2-center-end,.swal2-container.swal2-center-right{align-items:center;justify-content:flex-end}.swal2-container.swal2-bottom{align-items:flex-end}.swal2-container.swal2-bottom-left,.swal2-container.swal2-bottom-start{align-items:flex-end;justify-content:flex-start}.swal2-container.swal2-bottom-end,.swal2-container.swal2-bottom-right{align-items:flex-end;justify-content:flex-end}.swal2-container.swal2-grow-fullscreen>.swal2-modal{display:flex!important;flex:1;align-self:stretch;justify-content:center}.swal2-container.swal2-grow-row>.swal2-modal{display:flex!important;flex:1;align-content:center;justify-content:center}.swal2-container.swal2-grow-column{flex:1;flex-direction:column}.swal2-container.swal2-grow-column.swal2-bottom,.swal2-container.swal2-grow-column.swal2-center,.swal2-container.swal2-grow-column.swal2-top{align-items:center}.swal2-container.swal2-grow-column.swal2-bottom-left,.swal2-container.swal2-grow-column.swal2-bottom-start,.swal2-container.swal2-grow-column.swal2-center-left,.swal2-container.swal2-grow-column.swal2-center-start,.swal2-container.swal2-grow-column.swal2-top-left,.swal2-container.swal2-grow-column.swal2-top-start{align-items:flex-start}.swal2-container.swal2-grow-column.swal2-bottom-end,.swal2-container.swal2-grow-column.swal2-bottom-right,.swal2-container.swal2-grow-column.swal2-center-end,.swal2-container.swal2-grow-column.swal2-center-right,.swal2-container.swal2-grow-column.swal2-top-end,.swal2-container.swal2-grow-column.swal2-top-right{align-items:flex-end}.swal2-container.swal2-grow-column>.swal2-modal{display:flex!important;flex:1;align-content:center;justify-content:center}.swal2-container:not(.swal2-top):not(.swal2-top-start):not(.swal2-top-end):not(.swal2-top-left):not(.swal2-top-right):not(.swal2-center-start):not(.swal2-center-end):not(.swal2-center-left):not(.swal2-center-right):not(.swal2-bottom):not(.swal2-bottom-start):not(.swal2-bottom-end):not(.swal2-bottom-left):not(.swal2-bottom-right):not(.swal2-grow-fullscreen)>.swal2-modal{margin:auto}@media all and (-ms-high-contrast:none),(-ms-high-contrast:active){.swal2-container .swal2-modal{margin:0!important}}.swal2-container.swal2-fade{transition:background-color .1s}.swal2-container.swal2-shown{background-color:rgba(0,0,0,.4)}.swal2-popup{display:none;position:relative;flex-direction:column;justify-content:center;width:32em;max-width:100%;padding:1.25em;border-radius:.3125em;background:#fff;font-family:inherit;font-size:1rem;box-sizing:border-box}.swal2-popup:focus{outline:0}.swal2-popup.swal2-loading{overflow-y:hidden}.swal2-popup .swal2-header{display:flex;flex-direction:column;align-items:center}.swal2-popup .swal2-title{display:block;position:relative;max-width:100%;margin:0 0 .4em;padding:0;color:#595959;font-size:1.875em;font-weight:600;text-align:center;text-transform:none;word-wrap:break-word}.swal2-popup .swal2-actions{align-items:center;justify-content:center;margin:1.25em auto 0;z-index:1}.swal2-popup .swal2-actions:not(.swal2-loading) .swal2-styled[disabled]{opacity:.4}.swal2-popup .swal2-actions:not(.swal2-loading) .swal2-styled:hover{background-image:linear-gradient(rgba(0,0,0,.1),rgba(0,0,0,.1))}.swal2-popup .swal2-actions:not(.swal2-loading) .swal2-styled:active{background-image:linear-gradient(rgba(0,0,0,.2),rgba(0,0,0,.2))}.swal2-popup .swal2-actions.swal2-loading .swal2-styled.swal2-confirm{width:2.5em;height:2.5em;margin:.46875em;padding:0;border:.25em solid transparent;border-radius:100%;border-color:transparent;background-color:transparent!important;color:transparent;cursor:default;box-sizing:border-box;-webkit-animation:swal2-rotate-loading 1.5s linear 0s infinite normal;animation:swal2-rotate-loading 1.5s linear 0s infinite normal;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.swal2-popup .swal2-actions.swal2-loading .swal2-styled.swal2-cancel{margin-right:30px;margin-left:30px}.swal2-popup .swal2-actions.swal2-loading :not(.swal2-styled).swal2-confirm::after{display:inline-block;width:15px;height:15px;margin-left:5px;border:3px solid #999;border-radius:50%;border-right-color:transparent;box-shadow:1px 1px 1px #fff;content:'';-webkit-animation:swal2-rotate-loading 1.5s linear 0s infinite normal;animation:swal2-rotate-loading 1.5s linear 0s infinite normal}.swal2-popup .swal2-styled{margin:0 .3125em;padding:.625em 2em;font-weight:500;box-shadow:none}.swal2-popup .swal2-styled:not([disabled]){cursor:pointer}.swal2-popup .swal2-styled.swal2-confirm{border:0;border-radius:.25em;background:initial;background-color:#3085d6;color:#fff;font-size:1.0625em}.swal2-popup .swal2-styled.swal2-cancel{border:0;border-radius:.25em;background:initial;background-color:#aaa;color:#fff;font-size:1.0625em}.swal2-popup .swal2-styled:focus{outline:0;box-shadow:0 0 0 2px #fff,0 0 0 4px rgba(50,100,150,.4)}.swal2-popup .swal2-styled::-moz-focus-inner{border:0}.swal2-popup .swal2-footer{justify-content:center;margin:1.25em 0 0;padding:1em 0 0;border-top:1px solid #eee;color:#545454;font-size:1em}.swal2-popup .swal2-image{max-width:100%;margin:1.25em auto}.swal2-popup .swal2-close{position:absolute;top:0;right:0;justify-content:center;width:1.2em;height:1.2em;padding:0;transition:color .1s ease-out;border:none;border-radius:0;background:0 0;color:#ccc;font-family:serif;font-size:2.5em;line-height:1.2;cursor:pointer;overflow:hidden}.swal2-popup .swal2-close:hover{-webkit-transform:none;transform:none;color:#f27474}.swal2-popup>.swal2-checkbox,.swal2-popup>.swal2-file,.swal2-popup>.swal2-input,.swal2-popup>.swal2-radio,.swal2-popup>.swal2-select,.swal2-popup>.swal2-textarea{display:none}.swal2-popup .swal2-content{justify-content:center;margin:0;padding:0;color:#545454;font-size:1.125em;font-weight:300;line-height:normal;z-index:1;word-wrap:break-word}.swal2-popup #swal2-content{text-align:center}.swal2-popup .swal2-checkbox,.swal2-popup .swal2-file,.swal2-popup .swal2-input,.swal2-popup .swal2-radio,.swal2-popup .swal2-select,.swal2-popup .swal2-textarea{margin:1em auto}.swal2-popup .swal2-file,.swal2-popup .swal2-input,.swal2-popup .swal2-textarea{width:100%;transition:border-color .3s,box-shadow .3s;border:1px solid #d9d9d9;border-radius:.1875em;font-size:1.125em;box-shadow:inset 0 1px 1px rgba(0,0,0,.06);box-sizing:border-box}.swal2-popup .swal2-file.swal2-inputerror,.swal2-popup .swal2-input.swal2-inputerror,.swal2-popup .swal2-textarea.swal2-inputerror{border-color:#f27474!important;box-shadow:0 0 2px #f27474!important}.swal2-popup .swal2-file:focus,.swal2-popup .swal2-input:focus,.swal2-popup .swal2-textarea:focus{border:1px solid #b4dbed;outline:0;box-shadow:0 0 3px #c4e6f5}.swal2-popup .swal2-file::-webkit-input-placeholder,.swal2-popup .swal2-input::-webkit-input-placeholder,.swal2-popup .swal2-textarea::-webkit-input-placeholder{color:#ccc}.swal2-popup .swal2-file:-ms-input-placeholder,.swal2-popup .swal2-input:-ms-input-placeholder,.swal2-popup .swal2-textarea:-ms-input-placeholder{color:#ccc}.swal2-popup .swal2-file::-ms-input-placeholder,.swal2-popup .swal2-input::-ms-input-placeholder,.swal2-popup .swal2-textarea::-ms-input-placeholder{color:#ccc}.swal2-popup .swal2-file::placeholder,.swal2-popup .swal2-input::placeholder,.swal2-popup .swal2-textarea::placeholder{color:#ccc}.swal2-popup .swal2-range input{width:80%}.swal2-popup .swal2-range output{width:20%;font-weight:600;text-align:center}.swal2-popup .swal2-range input,.swal2-popup .swal2-range output{height:2.625em;margin:1em auto;padding:0;font-size:1.125em;line-height:2.625em}.swal2-popup .swal2-input{height:2.625em;padding:.75em}.swal2-popup .swal2-input[type=number]{max-width:10em}.swal2-popup .swal2-file{font-size:1.125em}.swal2-popup .swal2-textarea{height:6.75em;padding:.75em}.swal2-popup .swal2-select{min-width:50%;max-width:100%;padding:.375em .625em;color:#545454;font-size:1.125em}.swal2-popup .swal2-checkbox,.swal2-popup .swal2-radio{align-items:center;justify-content:center}.swal2-popup .swal2-checkbox label,.swal2-popup .swal2-radio label{margin:0 .6em;font-size:1.125em}.swal2-popup .swal2-checkbox input,.swal2-popup .swal2-radio input{margin:0 .4em}.swal2-popup .swal2-validationerror{display:none;align-items:center;justify-content:center;padding:.625em;background:#f0f0f0;color:#666;font-size:1em;font-weight:300;overflow:hidden}.swal2-popup .swal2-validationerror::before{display:inline-block;width:1.5em;min-width:1.5em;height:1.5em;margin:0 .625em;border-radius:50%;background-color:#f27474;color:#fff;font-weight:600;line-height:1.5em;text-align:center;content:'!';zoom:normal}@supports (-ms-accelerator:true){.swal2-range input{width:100%!important}.swal2-range output{display:none}}@media all and (-ms-high-contrast:none),(-ms-high-contrast:active){.swal2-range input{width:100%!important}.swal2-range output{display:none}}@-moz-document url-prefix(){.swal2-close:focus{outline:2px solid rgba(50,100,150,.4)}}.swal2-icon{position:relative;justify-content:center;width:5em;height:5em;margin:1.25em auto 1.875em;border:.25em solid transparent;border-radius:50%;line-height:5em;cursor:default;box-sizing:content-box;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;zoom:normal}.swal2-icon-text{font-size:3.75em}.swal2-icon.swal2-error{border-color:#f27474}.swal2-icon.swal2-error .swal2-x-mark{position:relative;flex-grow:1}.swal2-icon.swal2-error [class^=swal2-x-mark-line]{display:block;position:absolute;top:2.3125em;width:2.9375em;height:.3125em;border-radius:.125em;background-color:#f27474}.swal2-icon.swal2-error [class^=swal2-x-mark-line][class$=left]{left:1.0625em;-webkit-transform:rotate(45deg);transform:rotate(45deg)}.swal2-icon.swal2-error [class^=swal2-x-mark-line][class$=right]{right:1em;-webkit-transform:rotate(-45deg);transform:rotate(-45deg)}.swal2-icon.swal2-warning{border-color:#facea8;color:#f8bb86}.swal2-icon.swal2-info{border-color:#9de0f6;color:#3fc3ee}.swal2-icon.swal2-question{border-color:#c9dae1;color:#87adbd}.swal2-icon.swal2-success{border-color:#a5dc86}.swal2-icon.swal2-success [class^=swal2-success-circular-line]{position:absolute;width:3.75em;height:7.5em;-webkit-transform:rotate(45deg);transform:rotate(45deg);border-radius:50%}.swal2-icon.swal2-success [class^=swal2-success-circular-line][class$=left]{top:-.4375em;left:-2.0635em;-webkit-transform:rotate(-45deg);transform:rotate(-45deg);-webkit-transform-origin:3.75em 3.75em;transform-origin:3.75em 3.75em;border-radius:7.5em 0 0 7.5em}.swal2-icon.swal2-success [class^=swal2-success-circular-line][class$=right]{top:-.6875em;left:1.875em;-webkit-transform:rotate(-45deg);transform:rotate(-45deg);-webkit-transform-origin:0 3.75em;transform-origin:0 3.75em;border-radius:0 7.5em 7.5em 0}.swal2-icon.swal2-success .swal2-success-ring{position:absolute;top:-.25em;left:-.25em;width:100%;height:100%;border:.25em solid rgba(165,220,134,.3);border-radius:50%;z-index:2;box-sizing:content-box}.swal2-icon.swal2-success .swal2-success-fix{position:absolute;top:.5em;left:1.625em;width:.4375em;height:5.625em;-webkit-transform:rotate(-45deg);transform:rotate(-45deg);z-index:1}.swal2-icon.swal2-success [class^=swal2-success-line]{display:block;position:absolute;height:.3125em;border-radius:.125em;background-color:#a5dc86;z-index:2}.swal2-icon.swal2-success [class^=swal2-success-line][class$=tip]{top:2.875em;left:.875em;width:1.5625em;-webkit-transform:rotate(45deg);transform:rotate(45deg)}.swal2-icon.swal2-success [class^=swal2-success-line][class$=long]{top:2.375em;right:.5em;width:2.9375em;-webkit-transform:rotate(-45deg);transform:rotate(-45deg)}.swal2-progresssteps{align-items:center;margin:0 0 1.25em;padding:0;font-weight:600}.swal2-progresssteps li{display:inline-block;position:relative}.swal2-progresssteps .swal2-progresscircle{width:2em;height:2em;border-radius:2em;background:#3085d6;color:#fff;line-height:2em;text-align:center;z-index:20}.swal2-progresssteps .swal2-progresscircle:first-child{margin-left:0}.swal2-progresssteps .swal2-progresscircle:last-child{margin-right:0}.swal2-progresssteps .swal2-progresscircle.swal2-activeprogressstep{background:#3085d6}.swal2-progresssteps .swal2-progresscircle.swal2-activeprogressstep~.swal2-progresscircle{background:#add8e6}.swal2-progresssteps .swal2-progresscircle.swal2-activeprogressstep~.swal2-progressline{background:#add8e6}.swal2-progresssteps .swal2-progressline{width:2.5em;height:.4em;margin:0 -1px;background:#3085d6;z-index:10}[class^=swal2]{-webkit-tap-highlight-color:transparent}.swal2-show{-webkit-animation:swal2-show .3s;animation:swal2-show .3s}.swal2-show.swal2-noanimation{-webkit-animation:none;animation:none}.swal2-hide{-webkit-animation:swal2-hide .15s forwards;animation:swal2-hide .15s forwards}.swal2-hide.swal2-noanimation{-webkit-animation:none;animation:none}[dir=rtl] .swal2-close{right:auto;left:0}.swal2-animate-success-icon .swal2-success-line-tip{-webkit-animation:swal2-animate-success-line-tip .75s;animation:swal2-animate-success-line-tip .75s}.swal2-animate-success-icon .swal2-success-line-long{-webkit-animation:swal2-animate-success-line-long .75s;animation:swal2-animate-success-line-long .75s}.swal2-animate-success-icon .swal2-success-circular-line-right{-webkit-animation:swal2-rotate-success-circular-line 4.25s ease-in;animation:swal2-rotate-success-circular-line 4.25s ease-in}.swal2-animate-error-icon{-webkit-animation:swal2-animate-error-icon .5s;animation:swal2-animate-error-icon .5s}.swal2-animate-error-icon .swal2-x-mark{-webkit-animation:swal2-animate-error-x-mark .5s;animation:swal2-animate-error-x-mark .5s}@-webkit-keyframes swal2-rotate-loading{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes swal2-rotate-loading{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}</style></head>
+                <body class="mobifone-body modal-open" data-new-gr-c-s-check-loaded="14.1049.0" data-gr-ext-installed="">
+                    <div class="loading-page" style="display: none;">
+                        <i class="loading-icon"></i>
+                    </div>
+                    <!-- Header -->
+                     <!-- HEADER -->
+                <header>
+                    <div class="header is-mobile">
+                        <div class="inner">
+                            <div class="nav">
+                                <div class="nav-toggle" id="nav-toggle">
+                                    <span class="header-menu-icon"></span>
+                                </div>
+                                <a href="https://www.mobifone.vn" class="nav-logo">
+                                    <img src="https://www.mobifone.vn/assets/source/icons/logo-mobile.png" alt="logo">
+                                </a>
+                                <div class="form-search-mobi">
+                                    <img id="header-search-icon-mobi" class="header-search-icon" style="content: none" src="https://www.mobifone.vn/assets/source/icons/search-icon-mobi.png">
+                                </div>
+                                <form id="form-search-mobi-box" class="form-search-mobi-box" action="https://www.mobifone.vn/tim-kiem" method="GET">
+                                    <input id="search-input-mobi" type="text" class="form-control" name="s" placeholder="Tìm kiếm">
+                                </form>
+                            </div>
+                               
+                        </div>
+                    </div>
+                    <div class="bg-nav-menu" id="bg-nav-menu">
+                        <div class="bg-menu"></div>
+                        <span class="close-menu"></span>
+                    </div>
+                    <div class="nav-menu" id="nav-menu" style="height: 1237px;">
+                        <div class="headerImage">
+                            <a href="https://www.mobifone.vn">
+                                <img src="https://www.mobifone.vn/assets/source/image/logo.png?v=1.01" alt="#">
+                            </a>
+                        </div>
+                        <div class="nav-user">
+                            <div class="detail-user">
+                                <div class="nav-user-tab">
+                                    <div class="nav-user-head">
+                                        <span class="icon-arrow-up-select-black"></span>
+                                        <p>Cá nhân</p>
+                                    </div>
+                                    <div class="detail-user-box ">
+                                        <a class="link active" href="https://www.mobifone.vn">Cá nhân</a>
+                                        <a class="link" href="https://www.mobifone.vn/doanh-nghiep">Doanh nghiệp</a>
+                                    </div>
+                                </div>
+                            <a class="register-link" href="https://www.mobifone.vn/tai-khoan/dang-nhap-nhanh?referal=http%3A%2F%2Fwww.mobifone.vn%2Ftai-khoan%2Fdang-nhap-otp%3Freferal%3Dhttp%253A%252F%252Fwww.mobifone.vn">Đăng nhập</a>            </div>
+                        </div>
+                        <ul class="nav-list-mobile">
+                            <li class="nav-item "><a href="https://www.mobifone.vn">Trang chủ</a></li>
+                            <li class="nav-item " data="item-menu-first" id="item-first">
+                                Dịch vụ di động
+                                <span class="header-arrow_right-icon"></span>
+                            </li>            
+                            <ul class="nav-item-menu" id="item-menu-first">
+                                <div class="back" id="icon-back-first">
+                                    <span class="header-arrow_left-icon"></span>
+                                    Quay lại
+                                </div>
+                                <li class="title">Dịch vụ di động</li>
+                                <li><a href="https://www.mobifone.vn/dich-vu-di-dong/loai-thue-bao">Loại thuê bao</a></li>
+                                                <li><a href="https://www.mobifone.vn/dich-vu-di-dong/goi-cuoc">Gói cước</a></li>
+                                                <li><a href="https://www.mobifone.vn/dich-vu-di-dong/goi-data">Gói data</a></li>
+                                                <li><a href="https://www.mobifone.vn/dich-vu-di-dong/dich-vu">Dịch vụ</a></li>
+                                                <li><a href="https://chonso.mobifone.vn/web/" target="_blank">Chọn số</a></li>
+                                <li><a href="https://www.mobifone.vn/dich-vu-di-dong/quoc-te">Dịch vụ Quốc tế</a></li>
+                            </ul>
+                            <li class="nav-item " data="item-menu-second" id="item-second">
+                                Hỗ trợ khách hàng
+                                <span class="header-arrow_right-icon"></span>
+                            </li>
+                            <ul class="nav-item-menu" id="item-menu-second">
+                                <div class="back" id="icon-back-second">
+                                    <span class="header-arrow_left-icon"></span>
+                                    Quay lại
+                                </div>
+                                <li class="title">Hỗ trợ khách hàng</li>
+                                <li><a href="https://www.mobifone.vn/ho-tro-khach-hang/ket-noi-dai-lau">Kết nối dài lâu</a></li>
+                                <li><a href="https://www.mobifone.vn/ho-tro-khach-hang/cau-hoi-thuong-gap">Câu hỏi thường gặp</a></li>
+                                <li><a href="https://www.mobifone.vn/tai-khoan/dang-nhap-nhanh?referal=https%3A%2F%2Fwww.mobifone.vn%2Fho-tro-khach-hang%2Fphan-anh">Gửi phản ánh</a></li>
+                                <li><a href="https://www.mobifone.vn/ho-tro-khach-hang/vi-tri-cua-hang">Tìm kiếm cửa hàng</a></li>
+                                <li><a href="https://chuyenmang.mobifone.vn/" target="_blank">Chuyển mạng giữ số</a></li>
+                            </ul>
+                            <li class="nav-item " id="item-third">
+                                Khuyến mại
+                                <span class="header-arrow_right-icon"></span>
+                            </li>
+                            <ul class="nav-item-menu" id="item-menu-third">
+                                <div class="back" id="icon-back-third">
+                                    <span class="header-arrow_left-icon"></span>
+                                    Quay lại
+                                </div>
+                                <li class="title">Khuyến mại</li>
+                                <li><a href="https://www.mobifone.vn/tin-tuc?type=chuong-trinh-khuyen-mai">Tin khuyến mại</a></li>
+                                <li><a href="https://www.mobifone.vn/tin-tuc/thong-tin-trung-thuong">Thông tin trúng thưởng</a></li>
+                                <li><a href="https://www.mobifone.vn/tin-tuc/tra-cuu-ma-giai-thuong">Tra cứu mã/giải thưởng</a></li>
+                            </ul>
+                            <li class="nav-item active" id="item-fourth">
+                                My Mobifone
+                                <span class="header-arrow_right-icon"></span>
+                            </li>
+                            <ul class="nav-item-menu" id="item-menu-fourth">
+                                <div class="back" id="icon-back-fourth">
+                                    <span class="header-arrow_left-icon"></span>
+                                    Quay lại
+                                </div>
+                                <li class="title">My Mobifone</li>
+                                <div class="m-dropdown-item">
+                                    <div class="m-dropdown-title">
+                                        <span class="header-person-icon"></span>
+                                        Tài khoản
+                                    </div>
+                                    <ul>
+                                        <li><a href="https://www.mobifone.vn/tai-khoan/thong-tin-tai-khoan">Thông tin tài khoản</a></li>
+                                        <li><a href="https://www.mobifone.vn/tai-khoan/thong-tin-ca-nhan">Thông tin cá nhân</a></li>
+                                        <li><a href="https://www.mobifone.vn/tai-khoan/kiem-tra-dang-ky-thong-tin">Đăng ký thông tin</a></li>
+                                    </ul>
+                                </div>
+                                <div class="m-dropdown-item">
+                                    <div class="m-dropdown-title">
+                                        <span class="header-heart-icon"></span>
+                                        Tiện ích
+                                    </div>
+                                    <ul>
+                                        <li><a href="https://www.mobifone.vn/tien-ich?hinh-thuc=nap-tien">Nạp tiền</a></li>
+                                        <li><a href="https://www.mobifone.vn/tien-ich?hinh-thuc=thanh-toan-truc-tuyen">Thanh toán ngân hàng</a></li>
+                                        <li><a href="https://www.mobifone.vn/tien-ich?hinh-thuc=thanh-toan-tu-dong">Autopay</a></li>
+                                    </ul>
+                                </div>
+                                <div class="m-dropdown-item">
+                                    <div class="m-dropdown-title">
+                                        <span class="header-video-icon"></span>
+                                        Cước
+                                    </div>
+                                    <ul>
+                                        <li><a href="https://www.mobifone.vn/tai-khoan/thong-ke/all">Tra cước</a></li>
+                                        <li><a href="https://www.mobifone.vn/tai-khoan/lich-su-thanh-toan">Lịch sử nạp tiền/thanh toán</a></li>
+                                    </ul>
+                                </div>
+                            </ul>
+                            <li class="nav-item" data="item-menu-five" id="item-five">
+                                Giới thiệu
+                                <span class="header-arrow_right-icon"></span>
+                            </li>
+                            <ul class="nav-item-menu" id="item-menu-five">
+                                <div class="back" id="icon-back-five">
+                                    <span class="header-arrow_left-icon"></span>
+                                    Quay lại
+                                </div>
+                                <li class="title">Giới thiệu</li>
+                                <li><a href="https://www.mobifone.vn/gioi-thieu">Giới thiệu MobiFone</a></li>
+                                <li><a href="https://www.mobifone.vn/gioi-thieu/hop-tac-voi-mobifone">Hợp tác MobiFone</a></li>
+                                <li><a href="https://www.mobifone.vn/gioi-thieu/diem-cung-cap-dich-vu-vien-thong">Điểm cung cấp dịch vụ viễn thông</a></li>
+                                <li><a href="https://www.mobifone.vn/assets/source/file_upload/Danh+sach+cua+hang+ban+le+MobiFone.pdf">Cửa hàng bán lẻ</a></li>
+                                <li><a href="https://www.mobifone.vn/tuyen-dung">Tuyển dụng</a></li>
+                                <li><a href="https://www.mobifone.vn/assets/source/icon_mobile/logo.svg">Tải Logo</a></li>
+                            </ul>
+                            <li class="nav-item has-border" data="item-menu-six" id="item-six">
+                                Điều khoản &amp; bảo mật
+                                <span class="header-arrow_right-icon"></span>
+                            </li>
+                            <ul class="nav-item-menu" id="item-menu-six">
+                                <div class="back" id="icon-back-six">
+                                    <span class="header-arrow_left-icon"></span>
+                                    Quay lại
+                                </div>
+                                <li class="title">Điều khoản &amp; bảo mật</li>
+                                <li><a href="https://www.mobifone.vn/dieu-khoan-su-dung">Điều khoản sử dụng</a></li>
+                                <li><a href="https://www.mobifone.vn/bao-mat-thong-tin">Bảo mật thông tin</a></li>
+                            </ul>
+                            <li class="nav-item has-border change-language-box">Ngôn ngữ
+                                                <a class="change-language-link" href="https://www.mobifone.vn/changelanguage?lang=en&amp;referal=http%3A%2F%2Fwww.mobifone.vn%2Ftai-khoan%2Fdang-nhap-otp%3Freferal%3Dhttp%253A%252F%252Fwww.mobifone.vn">
+                                    <img class="change-language-icon-vi" src="https://www.mobifone.vn/assets/source/icons/lang-vi.png">
+                                </a>
+                                            </li>
+                        </ul>
+                    </div>
+                
+                    <div class="header is-desktop">
+                        <div class="inner">
+                            <div class="headerImage">
+                                <a href="https://www.mobifone.vn">
+                                    <img src="https://www.mobifone.vn/assets/source/image/logo.png?v=1.01" alt="#">
+                                </a>
+                            </div>
+                            <div class="header-items">
+                                <div class="dropdown header-item">
+                                  <div class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Cá nhân
+                                  </div>
+                                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="https://www.mobifone.vn/tai-khoan/thong-tin-tai-khoan">Cá nhân</a>
+                                    <a class="dropdown-item" href="https://www.mobifone.vn/doanh-nghiep">Doanh nghiệp</a>
+                                  </div>
+                                </div>
+                                <div class="dropdown header-item">
+                                  <div class="dropdown-toggle " id="userInfoBox" aria-haspopup="true" aria-expanded="false">
+                                    <a href="https://www.mobifone.vn/tai-khoan/dang-nhap-nhanh?referal=http%3A%2F%2Fwww.mobifone.vn%2Ftai-khoan%2Fdang-nhap-otp%3Freferal%3Dhttp%253A%252F%252Fwww.mobifone.vn">Đăng nhập</a>                  </div>
+                                                  </div>
+                                <div class="dropdown header-item">
+                                  <div class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    English                  </div>
+                                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="https://www.mobifone.vn/changelanguage?lang=vi&amp;referal=http%3A%2F%2Fwww.mobifone.vn%2Ftai-khoan%2Fdang-nhap-otp%3Freferal%3Dhttp%253A%252F%252Fwww.mobifone.vn">Tiếng Việt</a>
+                                    <a class="dropdown-item" href="https://www.mobifone.vn/changelanguage?lang=en&amp;referal=http%3A%2F%2Fwww.mobifone.vn%2Ftai-khoan%2Fdang-nhap-otp%3Freferal%3Dhttp%253A%252F%252Fwww.mobifone.vn">English</a>
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="header-menu is-desktop">  
+                        <div class="inner">
+                <!--        <div class="nav-toggle" id="nav-toggle-tablet">
+                            <span class="header-menu-icon"></span>
+                        </div>-->
+                        <ul class="nav-list">   
+                            <li class="nav-list-li ">
+                                <div class="nav-item">Dịch vụ di động</div>
+                                <ul class="m-dropdown mobile-service-dropdown">
+                                    <li><a href="https://www.mobifone.vn/dich-vu-di-dong/loai-thue-bao">Loại thuê bao</a></li>
+                                                        <li><a href="https://www.mobifone.vn/dich-vu-di-dong/goi-cuoc">Gói cước</a></li>
+                                                        <li><a href="https://www.mobifone.vn/dich-vu-di-dong/goi-data">Gói data</a></li>
+                                                        <li><a href="https://www.mobifone.vn/dich-vu-di-dong/dich-vu">Dịch vụ</a></li>
+                                                    <li><a href="https://chonso.mobifone.vn/web/" target="_blank">Chọn số</a></li>
+                                <li><a href="https://www.mobifone.vn/dich-vu-di-dong/quoc-te">Dịch vụ Quốc tế</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-list-li ">
+                                <div class="nav-item">Hỗ trợ khách hàng</div>
+                                <ul class="m-dropdown customer-support-dropdown">
+                                <li><a href="https://www.mobifone.vn/ho-tro-khach-hang/ket-noi-dai-lau">Kết nối dài lâu</a></li>
+                                    <li><a href="https://www.mobifone.vn/ho-tro-khach-hang/cau-hoi-thuong-gap">Câu hỏi thường gặp</a></li>
+                                    <li><a href="https://www.mobifone.vn/tai-khoan/dang-nhap-nhanh?referal=https%3A%2F%2Fwww.mobifone.vn%2Fho-tro-khach-hang%2Fphan-anh">Gửi phản ánh</a></li>
+                                    <li><a href="https://www.mobifone.vn/ho-tro-khach-hang/vi-tri-cua-hang">Tìm kiếm cửa hàng</a></li>
+                                    <li><a href="https://chuyenmang.mobifone.vn/" target="_blank">Chuyển mạng giữ số</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-list-li ">
+                                <div class="nav-item">Khuyến mại</div>
+                                <ul class="m-dropdown news-dropdown">
+                                <li><a href="https://www.mobifone.vn/tin-tuc?type=chuong-trinh-khuyen-mai">Tin khuyến mại</a></li>
+                                <li><a href="https://www.mobifone.vn/tin-tuc/thong-tin-trung-thuong">Thông tin trúng thưởng</a></li>
+                                <li><a href="https://www.mobifone.vn/tin-tuc/tra-cuu-ma-giai-thuong">Tra cứu mã/giải thưởng</a></li>
+                                </ul>
+                            </li>
+                <!--            <li class="nav-list-li">
+                                <a class="nav-item" href="https://www.mobifone.vn/tuyen-dung">Tuyển dụng</a>
+                            </li>-->
+                            <li class="nav-list-li active">
+                                <div class="nav-item">My Mobifone</div>
+                                <div class="m-dropdown mobifone-dropdown">
+                                    <div class="m-dropdown-item">
+                                        <div class="m-dropdown-title">
+                                            <span class="header-person-icon"></span>
+                                            Tài khoản                        </div>
+                                        <ul>
+                                            <li><a href="https://www.mobifone.vn/tai-khoan/thong-tin-tai-khoan">Thông tin tài khoản</a></li>
+                                            <li><a href="https://www.mobifone.vn/tai-khoan/thong-tin-ca-nhan">Thông tin cá nhân</a></li>
+                                            <li><a href="https://www.mobifone.vn/tai-khoan/kiem-tra-dang-ky-thong-tin">Đăng ký thông tin</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="m-dropdown-item">
+                                        <div class="m-dropdown-title">
+                                            <span class="header-heart-icon"></span>
+                                            Tiện ích
+                                        </div>
+                                        <ul>
+                                            <li><a href="https://www.mobifone.vn/tien-ich?hinh-thuc=nap-tien">Nạp tiền</a></li>
+                                        <!-- <li><a href="https://www.mobifone.vn/tien-ich">Chuyển tiền</a></li> -->
+                                        <li><a href="https://www.mobifone.vn/tien-ich?hinh-thuc=thanh-toan-truc-tuyen">Thanh toán ngân hàng</a></li>
+                                        <li><a href="https://www.mobifone.vn/tien-ich?hinh-thuc=thanh-toan-tu-dong">Autopay</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="m-dropdown-item">
+                                        <div class="m-dropdown-title">
+                                            <span class="header-video-icon"></span>
+                                            Cước
+                                        </div>
+                                        <ul>
+                                            <li><a href="https://www.mobifone.vn/tai-khoan/thong-ke/all">Tra cước</a></li>
+                                            <li><a href="https://www.mobifone.vn/tai-khoan/lich-su-thanh-toan">Lịch sử nạp tiền/thanh toán</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="search-box">
+                            <form action="https://www.mobifone.vn/tim-kiem" method="GET">
+                                <button type="submit" class="header-searchd-icon"></button>
+                                <span id="show-box-search" class="header-searchd-icon icon-ipad"></span>
+                                <input id="search-web" type="text" class="form-control" name="s" placeholder="Tìm kiếm">
+                            </form>
+                        </div>
+                    </div>   
+                    </div>   
+                </header>
+                    <!-- end: Header -->
+                
+                     <!-- Content -->
+                            <main class="l-main quick-login-page">
+                        <div class="main-content">
+                            <div class="inner">
+                                <div class="content-title is-desktop breadcrumb-mobifone">
+                                    <h2><a href="https://www.mobifone.vn">Trang chủ</a></h2>
+                                    <span class="breadcrumb-more-than"></span>
+                                    <h2><a href="https://www.mobifone.vn/tai-khoan/dang-nhap-nhanh?referal=http%3A%2F%2Fwww.mobifone.vn%2Ftai-khoan%2Fdang-nhap-otp%3Freferal%3Dhttp%253A%252F%252Fwww.mobifone.vn">Đăng nhập</a></h2>
+                                    <span class="breadcrumb-more-than"></span>
+                                    <h2 class="text-primary">Đăng nhập bằng OTP</h2>
+                                </div>
+                                <div class="content-title is-mobile">
+                                    Đăng nhập bằng OTP
+                                </div>
+                                <div class="login-content">
+                                    <div class="card-no-bg-mobile">
+                                        <div class="input-box prelogin-phone">
+                                            <input type="hidden" id="login-url" value="https://www.mobifone.vn/tai-khoan/send-otp">
+                                            <input type="text" name="phone" id="phone_input" class="input-box-data" placeholder="Nhập số điện thoại">
+                                            <span class="icon-cv-phone"></span>
+                                            <span class="help-block" id="phone_input_error" style="display: none;"></span>
+                                        </div>
+                                        <a class="btn-border" id="check-otp">Tiếp tục</a>
+                                    </div>
+                
+                                    <div class="modal fade show" id="modalOTP" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-modal="true" style="display: block;">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-body">
+                                                    <h3 class="title">Nhập mã xác nhận</h3>
+                                                    <p>Mã xác nhận 6 chữ số chúng tôi đã gửi đến số điện thoại: <strong id="phone_input_data">0787703994</strong></p>
+                                                    <form id="do-login-form" class="digit-group" data-group-name="digits" data-autosubmit="false" autocomplete="off">
+                                                        <input class="add-number-otp" data-index="1" type="number" placeholder="-" id="digit-1" name="digit-1" data-next="digit-2" maxlength="1" style="background: none; border: 1px solid rgb(35, 123, 211); border-radius: 0.3125rem;">
+                                                        <input class="add-number-otp" data-index="2" type="number" placeholder="-" id="digit-2" name="digit-2" data-next="digit-3" data-previous="digit-1" maxlength="1">
+                                                        <input class="add-number-otp" data-index="3" type="number" placeholder="-" id="digit-3" name="digit-3" data-next="digit-4" data-previous="digit-2" maxlength="1">
+                                                        <input class="add-number-otp" data-index="4" type="number" placeholder="-" id="digit-4" name="digit-4" data-next="digit-5" data-previous="digit-3" maxlength="1">
+                                                        <input class="add-number-otp" data-index="5" type="number" placeholder="-" id="digit-5" name="digit-5" data-next="digit-6" data-previous="digit-4" maxlength="1">
+                                                        <input class="add-number-otp" data-index="6" type="number" placeholder="-" id="digit-6" name="digit-6" data-previous="digit-5" maxlength="1">
+                                                    </form>
+                                                    <span class="help-block" id="do-login-error" style="display: none;"></span>
+                                                    <div class="resend-otp" style="display: none">
+                                                        <a id="resend-otp">Gửi lại mã OTP</a>
+                                                    </div>
+                                                    <input type="hidden" value="http://www.mobifone.vn" id="referal-url">
+                                                    <a class="btn-border submit-number-otp" post-url="https://www.mobifone.vn/tai-khoan/check-otp" id="do-login" href="javascript:void;">Xác nhận</a>
+                                                    <p class="time-expired">Mã OTP hết hạn sau 50s</p>
+                                                </div>
+                
+                                                <div class="x-symbol icon">
+                                                    <span class="modal-close-icon-large"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="height: 30px;"></div>
+                            </div>
+                        </div>
+                    </main>
+                    <!-- end: Content -->
+                
+                    <!-- Footer -->
+                    <div class="footer">
+                    <div class="inner">
+                        <div class="clearfix footer-top-mobi">
+                            <div class="footer-column col-xs-12">
+                                <h3 class="column-item-first">Tải ứng dụng My MobiFone</h3>
+                                <div class="social-media">
+                                    <a href="https://apps.apple.com/vn/app/my-mobifone/id719320091" target="_blank"><span class="icon-apple-ft"></span></a>
+                                    <a href="https://play.google.com/store/apps/details?id=vms.com.vn.mymobifone" target="_blank"><span class="icon-android-ft"></span></a>
+                                    <a href="https://appgallery.cloud.huawei.com/ag/n/app/C102512327?channelId=web&amp;detailType=0" target="_blank"><span class="icon-huawei-ft"></span></a>
+                                    <!--<a href="#"><span class="icon-qat-ft"></span></a>-->
+                                </div>
+                                <h3 class="column-item-first">Kết nối với MobiFone</h3>
+                                <div class="social-media">
+                                    <a href="https://www.facebook.com/mobifone" target="_blank"><span class="icon-facebook-ft"></span></a>
+                                    <a href="https://www.youtube.com/c/MobiFoneofficial" target="_blank"><span class="icon-youtube-ft"></span></a>
+                                    <a href="http://bantinketnoi.com.vn/" target="_blank"><span class="icon-news-ft"></span></a>
+                                </div>
+                            </div>
+                            <div class="footer-column is-mobile col-xs-12">
+                                <div class="item-box">
+                                    <h3 class="column-item-first">Tổng đài</h3>
+                                    <p class="phone-hot"><i class="icon-phone-hot-ft"></i> <span class="number">9090</span> (200đ/phút) | <span class="number">18001090</span>(miễn phí)</p>
+                                </div>
+                            </div>
+                            <div class="contact-footer is-mobile">
+                                <h3>Liên hệ <span class="icon-dow-contect"></span></h3>
+                            </div>
+                        </div>
+                        <div class="footer-row is-desktop row">
+                            <div class="footer-column col-sm-4">
+                                <h3 class="column-item-first">Tải ứng dụng My MobiFone</h3>
+                                <div class="social-media">
+                                    <a href="https://apps.apple.com/vn/app/my-mobifone/id719320091" target="_blank"><span class="icon-apple-ft"></span></a>
+                                    <a href="https://play.google.com/store/apps/details?id=vms.com.vn.mymobifone" target="_blank"><span class="icon-android-ft"></span></a>
+                                    <a href="https://appgallery.cloud.huawei.com/ag/n/app/C102512327?channelId=web&amp;detailType=0" target="_blank"><span class="icon-huawei-ft"></span></a>
+                                    <!--<a href="#"><span class="icon-qat-ft"></span></a>-->
+                                </div>
+                                <h3 class="column-item-first">Kết nối với MobiFone</h3>
+                                <div class="social-media">
+                                    <a href="https://www.facebook.com/mobifone" target="_blank"><span class="icon-facebook-ft"></span></a>
+                                    <a href="https://www.youtube.com/c/MobiFoneofficial" target="_blank"><span class="icon-youtube-ft"></span></a>
+                                    <a href="http://bantinketnoi.com.vn/" target="_blank"><span class="icon-news-ft"></span></a>
+                                </div>
+                            </div>
+                            <div class="footer-column col-sm-3">
+                                <h3 class="column-item-first">Giới thiệu</h3>
+                                <div class="column-item"><a href="https://www.mobifone.vn/gioi-thieu">Giới thiệu MobiFone</a></div>
+                                <div class="column-item"><a href="https://www.mobifone.vn/gioi-thieu/hop-tac-voi-mobifone">Hợp tác MobiFone</a></div>
+                                <div class="column-item"><a href="https://www.mobifone.vn/tuyen-dung">Tuyển dụng</a></div>
+                                <div class="column-item"><a href="https://www.mobifone.vn/assets/source/file/logofontchuMobiFone.rar">Tải Logo</a></div>
+                                
+                            </div>
+                            <div class="footer-column col-sm-5 footer-column-parent">
+                                <div class="footer-column-item">
+                                    <h3 class="column-item-first">Hỗ trợ khách hàng</h3>
+                                    <div class="column-item"><a href="https://www.mobifone.vn/tai-khoan/dang-nhap-nhanh?referal=https%3A%2F%2Fwww.mobifone.vn%2Fho-tro-khach-hang%2Fphan-anh">Gửi phản ánh</a></div>
+                                    <div class="column-item"><a href="https://www.mobifone.vn/ho-tro-khach-hang/cau-hoi-thuong-gap">Câu hỏi thường gặp</a></div>
+                                    <div class="column-item"><a href="https://www.mobifone.vn/ho-tro-khach-hang/vi-tri-cua-hang">Tìm kiếm cửa hàng</a></div>
+                                    <div class="column-item"><a href="https://chuyenmang.mobifone.vn" target="_blank">Chuyển mạng giữ số</a></div>
+                                    <div class="column-item"><a href="https://www.mobifone.vn/site-map">Sitemap</a></div>
+                                    <div class="column-item"><a href="https://www.mobifone.vn/tai-khoan/kiem-tra-dang-ky-thong-tin">Đăng ký thông tin</a></div>
+                                </div>
+                                <div class="footer-column-item">
+                                    <h3 class="column-item-first">Điều khoản &amp; bảo mật</h3>
+                                    <div class="column-item"><a href="https://www.mobifone.vn/dieu-khoan-su-dung">Điều khoản sử dụng</a></div>
+                                    <div class="column-item"><a href="https://www.mobifone.vn/bao-mat-thong-tin">Bảo mật thông tin</a></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="show-bottom-ft" class="footer-row-bottom row hide-ft">   
+                            <div class="col-sm-4 col-xs-12">
+                                <div class="info">
+                                    <span class="icon-mark-ft"></span>
+                                    <span>Tổng công ty Viễn Thông MobiFone <br>Số 01 phố Phạm Văn Bạch, Yên Hòa, Cầu Giấy, Hà Nội.</span>
+                                </div>
+                                <div class="info">
+                                    <span class="icon-phone-ft"></span>
+                                    <span>(+84-24) 3783 1800</span>
+                                </div>
+                                <div class="info info-last">
+                                    <span class="icon-scanner-ft"></span>
+                                    <span>(+84-24) 3783 1734</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 hidden-mobi">
+                                <h3 class="column-item-first"><i class="icon-phone-hot-ft"></i>Tổng đài</h3>
+                                <p class="phone-hot"><span class="number">9090</span> (200đ/phút)</p>
+                                <p class="phone-hot"><span class="number">18001090</span> (miễn phí)</p>
+                            </div>
+                            <div class="footer-row-right col-xs-12 col-sm-5">   
+                                <div class="footer-img">
+                                    <img class="kiem-dinh" src="https://www.mobifone.vn/assets/source/icons/tham-dinh.png">
+                                </div>
+                                <p class="sign">Giấy chứng nhận đăng ký doanh nghiệp: Mã số doanh nghiệp: 0100686209, Đăng ký thay đổi lần thứ 10 ngày 10/03/2021, cấp bởi sở KHĐT Thành phố Hà Nội.</p>
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-last">
+                    © Copyright  2022 - MobiFone.
+                </div>
+                <div class="call-online">
+                    <div id="social-call-box" class="social-call-box collapse">
+                        <a href="https://www.messenger.com/t/mobifone" target="_blank"><span class="face-icon"></span></a>
+                    </div>
+                    <div id="social-call-box" class="social-call-box collapse">
+                        <a href="https://zalo.me/4055244641440308778" target="_blank"><span class="zalo-icon"></span></a>
+                    </div>
+                    <div id="social-call-box" class="social-call-box collapse" onclick="openForm()">
+                        <span class="message-icon"></span>
+                    </div>
+                    <div class="social-kiem-dinh" data-toggle="collapse" data-target="#social-call-box">
+                        <img class="kiem-dinh" src="https://www.mobifone.vn/assets/source/icons/call-online.png">
+                    </div>
+                </div>
+                <div class="chat-popup" id="formChat">
+                    <div class="chat_header">
+                        <span><img class="logo_iframe" src="https://chatbot.mobifone.vn/image/logo.jpg.png" alt="logo"></span>
+                        <button class="close_iframe" onclick="closeForm()">X</button>
+                    </div>
+                    <iframe id="iframeChat" src="https://chatbot.mobifone.vn/?appCode=&amp;Channel=7" title="Chat MobiFone"></iframe>
+                </div>
+                    <!-- end: Footer -->
+                
+                    <script src="https://www.mobifone.vn/js/main.min.js?v=1.411"></script>
+                
+                <script src="https://www.google.com/recaptcha/api.js?render=6LfH2m8aAAAAAGNxyU62qFJWmNRHlTpBhed1DyH1"></script>
+                
+                <script>
+                var checkPhoneVN = function (phone) {
+                    if (!phone) return false;
+                    const regex_phone = /((\+)?(84|0)?[3|5|7|8|9|12])+([0-9]{8})\b/;
+                    if (phone.toString().match(regex_phone) !== false) return true;
+                    else return false;
+                }
+                $(document).ready(function() {
+                    $('#caroselBannerDesktop .carousel-slide-top').lightSlider({
+                        slideMargin: 32,
+                        item: 1,
+                        auto:true,
+                        loop: true,
+                        speed:1000,
+                        pause:  5000,
+                        pauseOnHover: true,
+                        responsive: [
+                            {
+                                breakpoint: 600,
+                                settings: {
+                                    item: 1,
+                                    slideMargin: 8
+                                }
+                            }
+                        ]
+                    }); 
+                }); 
+                </script>
+                        <script>
+                    function onSubmit(token) {
+                        document.getElementById("demo-form").submit();
+                    }
+                    $(document).ready(function() {
+                        $('.loading-page').hide();
+                    });
+                 </script>
+                    <script>
+                    $(document).ready(function() {
+                        var widthBody = $('body').width();
+                        if (widthBody <= 769) {
+                            var imageHeight = 150;
+                            var imageWidth = 547;
+                            var paddingLeft = '-'+((imageWidth - widthBody)/2)+'px';
+                            $('.image-slide-home').each(function(){
+                                $(this).parent().css({left: paddingLeft});
+                            });
+                        }
+                    });
+                    </script>
+                
+                
+                <div><div class="grecaptcha-badge" data-style="bottomright" style="width: 256px; height: 60px; display: block; transition: right 0.3s ease 0s; position: fixed; bottom: 14px; right: -186px; box-shadow: gray 0px 0px 5px; border-radius: 2px; overflow: hidden;"><div class="grecaptcha-logo"><iframe title="reCAPTCHA" src="https://www.google.com/recaptcha/api2/anchor?ar=1&amp;k=6LfH2m8aAAAAAGNxyU62qFJWmNRHlTpBhed1DyH1&amp;co=aHR0cHM6Ly93d3cubW9iaWZvbmUudm46NDQz&amp;hl=en&amp;v=BycHQdSIhzR_1EcOLw2mOzYQ&amp;size=invisible&amp;cb=lj3jowc1qdy4" width="256" height="60" role="presentation" name="a-ge9qqvaxond" frameborder="0" scrolling="no" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox"></iframe></div><div class="grecaptcha-error"></div><textarea id="g-recaptcha-response-100000" name="g-recaptcha-response" class="g-recaptcha-response" style="width: 250px; height: 40px; border: 1px solid rgb(193, 193, 193); margin: 10px 25px; padding: 0px; resize: none; display: none;"></textarea></div><iframe style="display: none;"></iframe></div><div class="modal-backdrop fade show"></div></body><grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration></html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Makplus - Marketplace HTML5 Template</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
+        <!-- Place favicon.ico in the root directory -->
+
+        <!-- Start - Template CSS here -->
+        <link rel="stylesheet" href="css/template_css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/template_css/animate.min.css">
+        <link rel="stylesheet" href="css/template_css/magnific-popup.css">
+        <link rel="stylesheet" href="css/template_css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/template_css/aos.css">
+        <link rel="stylesheet" href="css/template_css/flaticon.css">
+        <link rel="stylesheet" href="css/template_css/jquery-ui.min.css">
+        <link rel="stylesheet" href="css/template_css/nice-select.css">
+        <link rel="stylesheet" href="css/template_css/meanmenu.css">
+        <link rel="stylesheet" href="css/template_css/slick.css">
+        <link rel="stylesheet" href="css/template_css/default.css">
+        <link rel="stylesheet" href="css/template_css/style.css">
+        <link rel="stylesheet" href="css/template_css/responsive.css">
+        <!-- End - Template CSS here -->
+
+        <!-- Start - CSS here -->
+        <link rel="stylesheet" href="css/my_css/style.css">
+        <!-- End - CSS here -->
+    
+</head>
+<body>
+    <!-- header -->
+    {{>header}}
+    <!-- header -->
+    
+    <!-- Start: Main content-->
+    <div class="chargeMoneyMobile">
+        <div class="containerForm" >
+            <form class="chargeMoneyMobile-row button_submit" id="chargeMobileSubmit">
+                <!-- Đơn hàng            -->
+                <div class="chargeMoneyMobile-row numberphoneInput" >
+                    <div class="form__group field">
+                        <input type="text" class="form__field transactionID" placeholder="name" name="name" id='name'
+                               value= {{transactionID}}>
+                        <label for="name" class="form__label">Mã đơn hàng: </label>
+                    </div>
+                </div>
+                <br>
+                <!-- Member điền số tiền cân               -->
+                <div class="chargeMoneyMobile-row numberphoneInput" >
+                    <div class="form__group field">
+                        <input type="number" class="form__field amount" placeholder="name" name="name" id='name' required
+                               pattern="(?:\+?[1-9]\d{0,2}\s?|0)\(?\d{3,4}\)?[\s.-]?\d{3}[\s.-]?\d{3,4}" minlength="5" maxlength="12"/>
+                        <label for="name" class="form__label">Vui lòng nhập số tiền cần nạp: </label>
+                    </div>
+                </div>
+                <br>
+                <button type="submit" class="btnSubmit"><span>Nạp tiền ngay!</span></button>
+            </form>
+        </div>
+    </div>
+    <div class="showbox">
+        <div class="loader">
+            <svg class="circular" viewBox="25 25 50 50">
+            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
+            </svg>
+           
+        </div>
+        <div class="loaderText">
+            <h1>Giao dịch đang được thực hiện. Vui lòng chờ trong giây lát!</h1>
+            <h3>Vui lòng không làm mới hoặc tắt trình duyệt</h3>
+        </div>
+    </div>
+    <!-- End: Main content-->
+
+    <!-- footer -->
+    {{>footer}}
+    <!-- footer-end -->
+
+    <!-- Start - My JS here -->
+        <script src="js/my_js/qr_code_payment.js"></script>
+        
+    <!-- End - My JS here -->
+    <script>
+        $('header').css('display', 'none');
+    </script>
+	<!-- Start - Template JS here -->
+        <script src="js/template_js/vendor/jquery-1.12.4.min.js"></script>
+        <script src="js/template_js/popper.min.js"></script>
+        <script src="js/template_js/bootstrap.min.js"></script>
+        <script src="js/template_js/isotope.pkgd.min.js"></script>
+        <script src="js/template_js/slick.min.js"></script>
+        <script src="js/template_js/jquery.meanmenu.min.js"></script>
+        <script src="js/template_js/ajax-form.js"></script>
+        <script src="js/template_js/wow.min.js"></script>
+        <script src="js/template_js/aos.js"></script>
+        <script src="js/template_js/jquery-ui.min.js"></script>
+        <script src="js/template_js/jquery.counterup.min.js"></script>
+        <script src="js/template_js/jquery.waypoints.min.js"></script>
+        <script src="js/template_js/jquery.nice-select.min.js"></script>
+        <script src="js/template_js/jquery.scrollUp.min.js"></script>
+        <script src="js/template_js/imagesloaded.pkgd.min.js"></script>
+        <script src="js/template_js/jquery.magnific-popup.min.js"></script>
+        <script src="js/template_js/plugins.js"></script>
+        <script src="js/template_js/main.js"></script>
+    <!-- End - Template JS here -->
+</body>
+</html>

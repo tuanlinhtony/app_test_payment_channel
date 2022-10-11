@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Makplus - Marketplace HTML5 Template</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
+        <!-- Place favicon.ico in the root directory -->
+
+        <!-- Start - Template CSS here -->
+        <link rel="stylesheet" href="css/template_css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/template_css/animate.min.css">
+        <link rel="stylesheet" href="css/template_css/magnific-popup.css">
+        <link rel="stylesheet" href="css/template_css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/template_css/aos.css">
+        <link rel="stylesheet" href="css/template_css/flaticon.css">
+        <link rel="stylesheet" href="css/template_css/jquery-ui.min.css">
+        <link rel="stylesheet" href="css/template_css/nice-select.css">
+        <link rel="stylesheet" href="css/template_css/meanmenu.css">
+        <link rel="stylesheet" href="css/template_css/slick.css">
+        <link rel="stylesheet" href="css/template_css/default.css">
+        <link rel="stylesheet" href="css/template_css/style.css">
+        <link rel="stylesheet" href="css/template_css/responsive.css">
+        <!-- End - Template CSS here -->
+
+        <!-- Start - CSS here -->
+        <link rel="stylesheet" href="css/my_css/style.css">
+        <!-- End - CSS here -->
+    
+</head>
+<body>
+    <!-- header -->
+    {{>header}}
+    <!-- header -->
+    
+    <!-- Start: Main content-->
+    <div class="chargeMoneyMobile">
+        <div class="containerForm" >
+           
+            <div class="chargeMoneyMobile-row numberphoneInput" >
+                <div class="form__group field">
+                    <input type="tel" class="form__field" placeholder="name" name="name" id='name' required 
+                     pattern="(?:\+?[1-9]\d{0,2}\s?|0)\(?\d{3,4}\)?[\s.-]?\d{3}[\s.-]?\d{3,4}" minlength="9" maxlength="12"/>
+                    <label for="name" class="form__label">Vui lòng nhập số điện thoại của bạn: </label>
+                </div>
+            </div>
+            <br>
+
+            <h4>Lựa chọn nhà mạng:</h4>
+            <form class="chargeMoneyMobile-row selectNetwork">
+                <input type="radio" name="brandtype" id="1" class="hidebx" value="viettel">
+                <label for="1" class="lbl-radio">
+                    <div class="display-box">
+                        <img src="https://cdn.divineshop.vn/static/a0d5a326b4ffdb25423b7718b79b06e7.svg" alt="">
+                            {{!-- <div class="price">Giảm giá 5%</div> --}}
+                    </div>
+                </label>
+
+                <input type="radio" name="brandtype" id="2" class="hidebx" value="mobifone">
+                <label for="2" class="lbl-radio">
+                    <div class="display-box">
+                        {{!-- <div class="size">Nạp tiền chậm</div>
+                        <div class="price">Giảm giá 12%</div> --}}
+                        <img src="https://cdn.divineshop.vn/static/505f6720740a9cf0d74b62fef0835ec4.svg" alt="">
+                    </div>
+                </label>  
+
+                <input type="radio" name="brandtype" id="3" class="hidebx" value="vinaphone">
+                <label for="3" class="lbl-radio">
+                    <div class="display-box">
+                        {{!-- <div class="size">Mua thẻ cào thường</div>
+                        <div class="price">Giảm giá 3%</div> --}}
+                        <img src="https://cdn.divineshop.vn/static/38a2b33a023b1a564dacf4fa6f4487c7.svg" alt="">
+                    </div>
+                </label>
+
+                <input type="radio" name="brandtype" id="4" class="hidebx" value="vietnammobile">
+                <label for="4" class="lbl-radio">
+                    <div class="display-box">
+                        {{!-- <div class="size">Mua thẻ cào nạp ngay</div>
+                        <div class="price">Giảm giá 15%</div> --}}
+                        <img src="https://upload.wikimedia.org/wikipedia/vi/a/a8/Vietnamobile_Logo.svg" alt="">
+                    </div>
+                </label>
+
+                <input type="radio" name="brandtype" id="5" class="hidebx" value="gmobile">
+                <label for="5" class="lbl-radio">
+                    <div class="display-box">
+                        {{!-- <div class="size">Mua thẻ cào nạp ngay</div>
+                        <div class="price">Giảm giá 15%</div> --}}
+                        <img src="https://muathe123.vn/pictures/news/2021/01/04/siv1609744453.jpg" alt="G-mobile">
+                    </div>
+                </label>
+            </form>
+            <br>
+            
+            <h4>Lựa chọn mệnh giá:</h4>
+            <form class="chargeMoneyMobile-row selectDeno" id="deno">
+                {{!-- Start: Select buttons for denominations  --}}
+                <input type="radio" name="deno" id="6" class="hidebx deno" value="10000">
+                <label for="6" class="deno-radio">
+                    <div class="display-box">
+                        <div class="realPrice">9.000đ</div>
+                        <strike class="price">10.000đ</strike>
+                        <h6 class="saleoff">-2%</h6>
+                    </div>
+                </label>
+
+                <input type="radio" name="deno" id="7" class="hidebx deno" value="20000">
+                <label for="7" class="deno-radio">
+                    <div class="display-box">
+                        <div class="realPrice">18.000đ</div>
+                        <strike class="price">20.000đ</strike>
+                        <h6 class="saleoff">-2%</h6>
+                    </div>
+                </label>
+
+                <input type="radio" name="deno" id="8" class="hidebx deno" value="30000">
+                <label for="8" class="deno-radio">
+                    <div class="display-box">
+                        <div class="realPrice">27.000đ</div>
+                        <strike class="price">30.000đ</strike>
+                        <h6 class="saleoff">-2%</h6>
+                    </div>
+                </label>
+
+                <input type="radio" name="deno" id="9" class="hidebx deno" value="50000">
+                <label for="9" class="deno-radio">
+                    <div class="display-box">
+                        <div class="realPrice">45.000đ</div>
+                        <strike class="price">50.000đ</strike>
+                        <h6 class="saleoff">-2%</h6>
+                    </div>
+                </label>
+
+                <input type="radio" name="deno" id="10" class="hidebx deno" value="100000">
+                <label for="10" class="deno-radio">
+                    <div class="display-box">
+                        <div class="realPrice">90.000đ</div>
+                        <strike class="price">100.000đ</strike>
+                        <h6 class="saleoff">-2%</h6>
+                    </div>
+                </label>
+
+                <input type="radio" name="deno" id="11" class="hidebx deno" value="200000">
+                <label for="11" class="deno-radio">
+                    <div class="display-box">
+                        <div class="realPrice">180.000đ</div>
+                        <strike class="price">200.000đ</strike>
+                        <h6 class="saleoff">-2%</h6>
+                    </div>
+                </label>
+
+                <input type="radio" name="deno" id="12" class="hidebx deno" value="300000">
+                <label for="12" class="deno-radio">
+                    <div class="display-box">
+                        <div class="realPrice">270.000đ</div>
+                        <strike class="price">300.000đ</strike>
+                        <h6 class="saleoff">-2%</h6>
+                    </div>
+                </label>
+
+                <input type="radio" name="deno" id="13" class="hidebx deno" value="500000">
+                <label for="13" class="deno-radio">
+                    <div class="display-box">
+                        <div class="realPrice">450.000đ</div>
+                        <strike class="price">500.000đ</strike>
+                        <h6 class="saleoff">-2%</h6>
+                    </div>
+                </label>
+                
+            </form>
+            <br>
+
+            <form class="chargeMoneyMobile-row button_submit">
+                <button type="submit" class="btnSubmit"><span>Hover me!</span></button>
+            </form>
+        </div>
+    </div>
+    <div class="showbox">
+        <div class="loader">
+            <svg class="circular" viewBox="25 25 50 50">
+            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
+            </svg>
+           
+        </div>
+        <div class="loaderText">
+            <h1>Giao dịch đang được thực hiện. Vui lòng chờ trong giây lát!</h1>
+            <h3>Vui lòng không làm mới hoặc tắt trình duyệt</h3>
+        </div>
+    </div>
+    <!-- End: Main content-->
+
+    <!-- footer -->
+    {{>footer}}
+    <!-- footer-end -->
+
+    <!-- Start - My JS here -->
+        <script src="js/my_js/top_up_mobile.js"></script>
+        
+    <!-- End - My JS here -->
+    <script>
+        $('header').css('display', 'none');
+    </script>
+	<!-- Start - Template JS here -->
+        <script src="js/template_js/vendor/jquery-1.12.4.min.js"></script>
+        <script src="js/template_js/popper.min.js"></script>
+        <script src="js/template_js/bootstrap.min.js"></script>
+        <script src="js/template_js/isotope.pkgd.min.js"></script>
+        <script src="js/template_js/slick.min.js"></script>
+        <script src="js/template_js/jquery.meanmenu.min.js"></script>
+        <script src="js/template_js/ajax-form.js"></script>
+        <script src="js/template_js/wow.min.js"></script>
+        <script src="js/template_js/aos.js"></script>
+        <script src="js/template_js/jquery-ui.min.js"></script>
+        <script src="js/template_js/jquery.counterup.min.js"></script>
+        <script src="js/template_js/jquery.waypoints.min.js"></script>
+        <script src="js/template_js/jquery.nice-select.min.js"></script>
+        <script src="js/template_js/jquery.scrollUp.min.js"></script>
+        <script src="js/template_js/imagesloaded.pkgd.min.js"></script>
+        <script src="js/template_js/jquery.magnific-popup.min.js"></script>
+        <script src="js/template_js/plugins.js"></script>
+        <script src="js/template_js/main.js"></script>
+    <!-- End - Template JS here -->
+</body>
+</html>

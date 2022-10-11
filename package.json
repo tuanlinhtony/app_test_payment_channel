@@ -1,0 +1,37 @@
+{
+  "name": "banthecao",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "env-cmd -f ./config/dev.env nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "dotenv": "^14.3.2",
+    "env-cmd": "^10.1.0",
+    "nodemon": "^2.0.15"
+  },
+  "dependencies": {
+    "async": "^3.2.3",
+    "axios": "^0.26.0",
+    "chromedriver": "^98.0.0",
+    "cleave.js": "^1.6.0",
+    "express": "^4.17.2",
+    "form-data": "^4.0.0",
+    "google-libphonenumber": "^3.2.27",
+    "hbs": "^4.2.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongodb": "^4.3.1",
+    "mongoose": "^6.1.8",
+    "postman-request": "^2.88.1-postman.31",
+    "puppeteer": "^13.3.2",
+    "selenium-webdriver": "^4.1.1",
+    "uuid": "^9.0.0",
+    "validator": "^13.7.0"
+  }
+}

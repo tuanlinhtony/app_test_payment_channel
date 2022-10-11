@@ -1,0 +1,49 @@
+<form id="do-login-form" class="digit-group" data-group-name="digits" data-autosubmit="false" autocomplete="off">
+    <input class="add-number-otp" data-index="1" type="number" placeholder="-" id="digit-1" name="digit-1" data-next="digit-2" maxlength="1">
+    <input class="add-number-otp" data-index="2" type="number" placeholder="-" id="digit-2" name="digit-2" data-next="digit-3" data-previous="digit-1" maxlength="1">
+    <input class="add-number-otp" data-index="3" type="number" placeholder="-" id="digit-3" name="digit-3" data-next="digit-4" data-previous="digit-2" maxlength="1">
+    <input class="add-number-otp" data-index="4" type="number" placeholder="-" id="digit-4" name="digit-4" data-next="digit-5" data-previous="digit-3" maxlength="1">
+    <input class="add-number-otp" data-index="5" type="number" placeholder="-" id="digit-5" name="digit-5" data-next="digit-6" data-previous="digit-4" maxlength="1">
+    <input class="add-number-otp" data-index="6" type="number" placeholder="-" id="digit-6" name="digit-6" data-previous="digit-5" maxlength="1">
+</form>
+
+
+
+const webdriver = require('selenium-webdriver')
+        const driver = new webdriver.Builder().forBrowser('chrome').build()
+        try {
+            if(transaction.provider === 'mobifone')
+            await driver.get('https://www.mobifone.vn/tai-khoan/dang-nhap-otp?referal=http%3A%2F%2Fwww.mobifone.vn')
+            await driver.findElement(By.id('phone_input')).sendKeys(transaction.numberPhone)
+            await driver.findElement(By.id('check-otp')).click()
+            await sleep(1000)
+        } catch (error) {
+          console.log(error.message)  
+        }
+
+
+        <div class="modal-content">
+          <div class="modal-body">
+              <h3 class="title">Nhập mã xác nhận</h3>
+              <p>Mã xác nhận 6 chữ số chúng tôi đã gửi đến số điện thoại: <strong id="phone_input_data">0787703994</strong></p>
+              <form id="do-login-form" class="digit-group" data-group-name="digits" data-autosubmit="false" autocomplete="off">
+                  <input class="add-number-otp" data-index="1" type="number" placeholder="-" id="digit-1" name="digit-1" data-next="digit-2" maxlength="1" style="background: none; border: 1px solid rgb(35, 123, 211); border-radius: 0.3125rem;">
+                  <input class="add-number-otp" data-index="2" type="number" placeholder="-" id="digit-2" name="digit-2" data-next="digit-3" data-previous="digit-1" maxlength="1">
+                  <input class="add-number-otp" data-index="3" type="number" placeholder="-" id="digit-3" name="digit-3" data-next="digit-4" data-previous="digit-2" maxlength="1">
+                  <input class="add-number-otp" data-index="4" type="number" placeholder="-" id="digit-4" name="digit-4" data-next="digit-5" data-previous="digit-3" maxlength="1">
+                  <input class="add-number-otp" data-index="5" type="number" placeholder="-" id="digit-5" name="digit-5" data-next="digit-6" data-previous="digit-4" maxlength="1">
+                  <input class="add-number-otp" data-index="6" type="number" placeholder="-" id="digit-6" name="digit-6" data-previous="digit-5" maxlength="1">
+              </form>
+              <span class="help-block" id="do-login-error" style="display: none;"></span>
+              <div class="resend-otp" style="display: none">
+                  <a id="resend-otp">Gửi lại mã OTP</a>
+              </div>
+              <input type="hidden" value="http://www.mobifone.vn" id="referal-url">
+              <a class="btn-border submit-number-otp" post-url="https://www.mobifone.vn/tai-khoan/check-otp" id="do-login" href="javascript:void;">Xác nhận</a>
+              <p class="time-expired">Mã OTP hết hạn sau 39s</p>
+          </div>
+
+          <div class="x-symbol icon">
+              <span class="modal-close-icon-large"></span>
+          </div>
+      </div>
