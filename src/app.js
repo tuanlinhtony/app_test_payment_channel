@@ -3,7 +3,7 @@ require('./db/mongoose')
 const hbs = require('hbs')
 const path = require('path')
 const bodyParser = require('body-parser')
-
+const cors = require("cors");
 
 //Add routers
 const pageRouter = require('./routers/mainProcess/pageRouter')
@@ -12,6 +12,13 @@ const otpDeliver = require('./routers/chargeMobileProcess/otpDeliver')
 
 //create Express Application
 const app = express()
+
+var corsOptions = {
+    origin: 'ec2-13-214-211-215.ap-southeast-1.compute.amazonaws.com',
+    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
+
+app.use(cors(corsOptions))
 
 //Define paths for Express config
 const publicDirectoryPath = path.join(__dirname, './public')
