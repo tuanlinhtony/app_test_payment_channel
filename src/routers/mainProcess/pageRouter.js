@@ -28,7 +28,7 @@ router.get('/top_up', async(req,res) => {
 
 //Create buy introduction view
 router.get('/pay_out', async(req,res) => {
-    res.render('pay_out')
+    res.render('pay_out', {transactionID: uuidv4()})
 })
 
 module.exports = router

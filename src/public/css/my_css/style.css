@@ -464,7 +464,7 @@ input[type=radio]:checked + .deno-radio{
 	background: var(--group-background-focus);
 	border-color: var(--group-border-focus);
   }
-  
+
   .form-field {
 	display: block;
 	width: 100%;

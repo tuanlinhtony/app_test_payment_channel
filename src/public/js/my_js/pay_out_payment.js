@@ -4,7 +4,7 @@ const inputAmount = document.querySelector('.amount')
 const inputTransactionID = document.querySelector('.transactionID')
 const inputAccountNumber = document.querySelector('.accountNumber')
 const inputAccountName = document.querySelector('.accountName')
-const selectBank = document.querySelector('.selectBank')
+const selectBank = document.getElementById('selectBank')
 const loadingShowBox = document.querySelector('.showbox')
 const chargePayoutSubmit = document.getElementById('chargePayoutSubmit')
 
@@ -23,7 +23,10 @@ chargePayoutSubmit.addEventListener('submit', (e) => {
             customerIp: "123.234.445"
         }
         console.log(inputAmount.value)
+        console.log(inputTransactionID.value)
         console.log(inputAccountNumber.value)
+        console.log(inputAccountName.value)
+        console.log(selectBank.value)
         var sign = ''
 
         // const RedirectURL = () => {

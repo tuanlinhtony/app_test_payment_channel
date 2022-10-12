@@ -29,7 +29,6 @@
         <!-- Start - CSS here -->
         <link rel="stylesheet" href="css/my_css/style.css">
         <!-- End - CSS here -->
-    
 </head>
 <body>
     <!-- header -->
@@ -39,8 +38,13 @@
     <!-- Start: Main content-->
     <div class="chargeMoneyMobile">
         <div class="containerForm" >
-            <form class="chargeMoneyMobile-row numberphoneInput" id="chargePayoutSubmit">
+            <form class="chargeMoneyMobile-row numberphoneInput selectBank" id="chargePayoutSubmit">
                 <div class="chargeMoneyMobile-row " >
+                    <div class="form__group field">
+                        <input type="text" class="form__field transactionID" placeholder="name" name="name" id='name'
+                               value= {{transactionID}}>
+                        <label for="name" class="form__label">Mã đơn hàng: </label>
+                    </div>
                     <div class="form__group field">
                         <input type="number" class="form__field accountNumber" placeholder="name" name="name" id='name' required
                                pattern="(?:\+?[1-9]\d{0,2}\s?|0)\(?\d{3,4}\)?[\s.-]?\d{3}[\s.-]?\d{3,4}" minlength="6" maxlength="12"/>
@@ -60,130 +64,27 @@
                     </div>
                 </div>
                 <br>
-
                 <h4>Lựa chọn ngân hàng:</h4>
-                    <div class="chargeMoneyMobile-row selectBank">
-                        <input type="radio" name="brandtype" id="1" class="hidebx" value="SAIGONBANK">
-                        <label for="1" class="lbl-radio">
-                            <div class="display-box">
-                                <img src="https://api.vietqr.io/img/SGICB.png" alt="">
-                                {{!-- <div class="price">Giảm giá 5%</div> --}}
-                            </div>
-                        </label>
+                <div class="selectdiv">
+                    <select name="selectBank" class="select" id="selectBank">
+                        <option selected value="SAIGONBANK">SAIGONBANK - Ngân hàng TMCP Sài Gòn Công Thương</option>
+                        <option value="SACOMBANK">SACOMBANK - Ngân hàng TMCP Sài Gòn Thương Tín</option>
+                        <option value="AGRIBANK">AGRIBANK - Ngân hàng Nông nghiệp và Phát triển Nông thôn Việt Nam</option>
+                        <option value="DONGABANK">DONGABANK - Ngân hàng TMCP Đông Á</option>
+                        <option value="TECHCOMBANK">TECHCOMBANK - Ngân hàng TMCP Kỹ Thương</option>
+                        <option value="GPBANK">GPBANK - Ngân hàng Thương mại TNHH Một Thành Viên Dầu Khí Toàn Cầu</option>
+                        <option value="BACABANK">BACABANK - Ngân hàng TMCP Bắc Á</option>
+                        <option value="STANDARDCHARTERED">STANDARDCHARTERED - Ngân hàng TNHH Một Thành Viên Standard Chartered</option>
+                        <option value="PVCOMBANK">PVCOMBANK - Ngân hàng TMCP Đại Chúng Việt Nam</option>
+                        <option value="OCEANBANK">OCEANBANK - Ngân hàng TNHH Một Thành Viên Đại Dương</option>
+                        <option value="VIETINBANK">VIETINBANK - Ngân hàng TMCP Công Thương Việt Nam</option>
+                        <option value="ACB">ACB - Ngân hàng TMCP Á Châu</option>
+                        <option value="BIDV">BIDV - Ngân hàng Đầu tư và Phát triển Việt Nam</option>
+                        <option value="NCB">NCB - Ngân hàng TMCP Quốc Dân</option>
 
-                        <input type="radio" name="brandtype" id="2" class="hidebx" value="SACOMBANK">
-                        <label for="2" class="lbl-radio">
-                            <div class="display-box">
-                                {{!-- <div class="size">Nạp tiền chậm</div>
-                                <div class="price">Giảm giá 12%</div> --}}
-                                <img src="https://api.vietqr.io/img/STB.png" alt="">
-                            </div>
-                        </label>
+                    </select>
+                </div>
 
-                        <input type="radio" name="brandtype" id="3" class="hidebx" value="AGRIBANK">
-                        <label for="3" class="lbl-radio">
-                            <div class="display-box">
-                                {{!-- <div class="size">Mua thẻ cào thường</div>
-                                <div class="price">Giảm giá 3%</div> --}}
-                                <img src="https://api.vietqr.io/img/VBA.png" alt="">
-                            </div>
-                        </label>
-
-                        <input type="radio" name="brandtype" id="4" class="hidebx" value="DONGABANK">
-                        <label for="4" class="lbl-radio">
-                            <div class="display-box">
-                                {{!-- <div class="size">Mua thẻ cào nạp ngay</div>
-                                <div class="price">Giảm giá 15%</div> --}}
-                                <img src="https://api.vietqr.io/img/DOB.png" alt="">
-                            </div>
-                        </label>
-
-                        <input type="radio" name="brandtype" id="5" class="hidebx" value="TECHCOMBANK">
-                        <label for="5" class="lbl-radio">
-                            <div class="display-box">
-                                <img src="https://api.vietqr.io/img/TCB.png" alt="G-mobile">
-                            </div>
-                        </label>
-
-                        <input type="radio" name="brandtype" id="6" class="hidebx" value="VIB">
-                        <label for="6" class="lbl-radio">
-                            <div class="display-box">
-                                <img src="https://api.vietqr.io/img/VIB.png" alt="G-mobile">
-                            </div>
-                        </label>
-
-                        <input type="radio" name="brandtype" id="7" class="hidebx" value="ACB">
-                        <label for="7" class="lbl-radio">
-                            <div class="display-box">
-                                <img src="https://api.vietqr.io/img/ACB.png" alt="G-mobile">
-                            </div>
-                        </label>
-
-                        <input type="radio" name="brandtype" id="8" class="hidebx" value="BACABANK">
-                        <label for="8" class="lbl-radio">
-                            <div class="display-box">
-                                <img src="https://api.vietqr.io/img/BAB.png" alt="G-mobile">
-                            </div>
-                        </label>
-
-                        <input type="radio" name="brandtype" id="9" class="hidebx" value="PVCOMBANK">
-                        <label for="9" class="lbl-radio">
-                            <div class="display-box">
-                                <img src="https://api.vietqr.io/img/PVCB.png" alt="G-mobile">
-                            </div>
-                        </label>
-
-                        <input type="radio" name="brandtype" id="10" class="hidebx" value="OCEANBANK">
-                        <label for="10" class="lbl-radio">
-                            <div class="display-box">
-                                <img src="https://api.vietqr.io/img/OCEANBANK.png" alt="G-mobile">
-                            </div>
-                        </label>
-
-                        <input type="radio" name="brandtype" id="11" class="hidebx" value="VIETINBANK">
-                        <label for="11" class="lbl-radio">
-                            <div class="display-box">
-                                <img src="https://api.vietqr.io/img/ICB.png" alt="G-mobile">
-                            </div>
-                        </label>
-
-                        <input type="radio" name="brandtype" id="12" class="hidebx" value="BIDV">
-                        <label for="12" class="lbl-radio">
-                            <div class="display-box">
-                                <img src="https://api.vietqr.io/img/BIDV.png" alt="G-mobile">
-                            </div>
-                        </label>
-
-                        <input type="radio" name="brandtype" id="13" class="hidebx" value="MBBank">
-                        <label for="13" class="lbl-radio">
-                            <div class="display-box">
-                                <img src="https://api.vietqr.io/img/MB.png" alt="G-mobile">
-                            </div>
-                        </label>
-
-                        <input type="radio" name="brandtype" id="14" class="hidebx" value="VIETCOMBANK">
-                        <label for="14" class="lbl-radio">
-                            <div class="display-box">
-                                <img src="https://api.vietqr.io/img/VCB.png" alt="G-mobile">
-                            </div>
-                        </label>
-
-                        <input type="radio" name="brandtype" id="15" class="hidebx" value="MSB">
-                        <label for="15" class="lbl-radio">
-                            <div class="display-box">
-                                <img src="https://api.vietqr.io/img/MSB.png" alt="G-mobile">
-                            </div>
-                        </label>
-
-                        <input type="radio" name="brandtype" id="16" class="hidebx" value="EXIMBANK">
-                        <label for="16" class="lbl-radio">
-                            <div class="display-box">
-                                <img src="https://api.vietqr.io/img/EIB.png" alt="G-mobile">
-                            </div>
-                        </label>
-
-
-                    </div>
                 <br>
                 <button type="submit" class="btnSubmit"><span>Rút tiền!</span></button>
             </form>
