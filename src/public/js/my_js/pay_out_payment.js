@@ -15,7 +15,7 @@ chargePayoutSubmit.addEventListener('submit', (e) => {
         const dataRequest = {
             merchantCode: "a7e5302f-ed13-4b39-80fa-e511c47e2cc1",
             merchantKey: "H47cAcEzr8nz1vr",
-            transactionId: "13465457984653132465",
+            transactionId: inputTransactionID.value,
             moneyRequest: inputAmount.value,
             bankCode: selectBank.value,
             bankAccountNumber: inputAccountNumber.value,
