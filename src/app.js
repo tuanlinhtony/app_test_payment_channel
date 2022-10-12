@@ -7,7 +7,7 @@ const cors = require("cors");
 
 //Add routers
 const pageRouter = require('./routers/mainProcess/pageRouter')
-const transRouter = require('./routers/mainProcess/transactions')
+const transRouter = require('./routers/mainProcess/callback')
 const otpDeliver = require('./routers/chargeMobileProcess/otpDeliver')
 
 //create Express Application

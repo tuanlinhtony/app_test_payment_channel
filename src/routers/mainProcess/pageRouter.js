@@ -31,4 +31,9 @@ router.get('/pay_out', async(req,res) => {
     res.render('pay_out', {transactionID: uuidv4()})
 })
 
+//Create buy introduction view
+router.get('/callback', async(req,res) => {
+    res.render('callback')
+})
+
 module.exports = router
