@@ -4,19 +4,19 @@ const  validator = require('validator')
 const callbackSchema = new mongoose.Schema({
         balance: {
             type: Number,
-            required: true
+            required: false
         },
         callbackType: {
             type: String,
-            required: true
+            required: false
         },
         code: {
             type: String,
-            required: true
+            required: false
         },
         forControl: {
             type: String,
-            required: true
+            required: false
         },
         message: {
             type: String,
@@ -28,7 +28,15 @@ const callbackSchema = new mongoose.Schema({
         },
         realAmount: {
             type: String,
-            required: true
+            required: false
+        },
+        qrCode: {
+            type: String,
+            required: false
+        },
+        redirectUrl: {
+            type: String,
+            required: false
         },
         sign: {
             type: String,
