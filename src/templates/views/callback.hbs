@@ -75,44 +75,41 @@
     <!-- header -->
     
     <!-- Start: Main content-->
-    <div class="chargeMoneyMobile">
-        <div class="containerForm" >
-            <table class="styled-table">
-                <thead>
-                <tr>
-                    <th>Order ID</th>
-                    <th>Sign</th>
-                    <th>Real Amount</th>
-                    <th>Order ID</th>
-                    <th>Message</th>
-                    <th>For Control</th>
-                    <th>Code</th>
-                    <th>Callback Type</th>
-                    <th>Balance</th>
-                    <th>Redirect Url</th>
-                </tr>
-                </thead>
-                {{#each callbacks}}
-                <tbody>
-                    <tr>
-                        <td>{{transactionId}}</td>
-                        <td>{{sign}}</td>
-                        <td>{{realAmount}}</td>
-                        <td>{{orderId}}</td>
-                        <td>{{message}}</td>
-                        <td>{{forControl}}</td>
-                        <td>{{code}}</td>
-                        <td>{{callbackType}}</td>
-                        <td>{{balance}}</td>
-                        <td>{{redirectUrl}}</td>
-                    </tr>
-                <!-- and so on... -->
-                </tbody>
-                {{/each}}
+    <table class="styled-table">
+        <thead>
+        <tr>
+            <th>Order ID</th>
+            <th>Sign</th>
+            <th>Real Amount</th>
+            <th>Order ID</th>
+            <th>Message</th>
+            <th>For Control</th>
+            <th>Code</th>
+            <th>Callback Type</th>
+            <th>Balance</th>
+            <th>Redirect Url</th>
+        </tr>
+        </thead>
+        {{#each callbacks}}
+            <tbody>
+            <tr>
+                <td>{{transactionId}}</td>
+                <td>{{sign}}</td>
+                <td>{{realAmount}}</td>
+                <td>{{orderId}}</td>
+                <td>{{message}}</td>
+                <td>{{forControl}}</td>
+                <td>{{code}}</td>
+                <td>{{callbackType}}</td>
+                <td>{{balance}}</td>
+                <td>{{redirectUrl}}</td>
+            </tr>
+            <!-- and so on... -->
+            </tbody>
+        {{/each}}
 
-            </table>
-        </div>
-    </div>
+    </table>
+
     <div class="showbox">
         <div class="loader">
             <svg class="circular" viewBox="25 25 50 50">
