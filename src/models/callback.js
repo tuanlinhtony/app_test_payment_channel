@@ -20,11 +20,11 @@ const callbackSchema = new mongoose.Schema({
         },
         message: {
             type: String,
-            required: true
+            required: false
         },
         orderId: {
             type: String,
-            required: true
+            required: false
         },
         realAmount: {
             type: String,
@@ -40,11 +40,11 @@ const callbackSchema = new mongoose.Schema({
         },
         sign: {
             type: String,
-            required: true
+            required: false
         },
         transactionId: {
             type: String,
-            required: true
+            required: false
         },
     }
     ,

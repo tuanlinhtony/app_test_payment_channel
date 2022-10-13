@@ -12,7 +12,7 @@ router.post('/callback', async (req, res) => {
     //refactor with async/await
     try{
         await callback.save()
-        res.status(200).send('succeed')
+        res.status(200).send('Success!Thank you so much!')
         console.log('Saved!!')
     }catch(e){
         console.log(e.message)
