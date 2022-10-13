@@ -10,8 +10,8 @@ const chargeMobileSubmit = document.getElementById('chargeMobileSubmit')
 chargeMobileSubmit.addEventListener('submit', (e) => {
     e.preventDefault()
         const dataRequest = {
-            merchantCode: "a7e5302f-ed13-4b39-80fa-e511c47e2cc1",
-            merchantKey: "H47cAcEzr8nz1vr",
+            merchantCode: "0b586d24-8176-49ff-bac0-0ceb33616a22",
+            merchantKey: "odOYoUaKFqtmfOg",
             transactionId: inputTransactionID.value,
             moneyRequest: inputAmount.value,
             customerIp: "123.234.445"
