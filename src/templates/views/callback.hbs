@@ -80,21 +80,29 @@
             <table class="styled-table">
                 <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Points</th>
+                    <th>Order ID</th>
+                    <th>Message</th>
+                    <th>Code</th>
+                    <th>Sign</th>
                 </tr>
                 </thead>
+                {{#each callbacks}}
                 <tbody>
-                <tr>
-                    <td>Dom</td>
-                    <td>6000</td>
-                </tr>
-                <tr class="active-row">
-                    <td>Melissa</td>
-                    <td>5150</td>
-                </tr>
+                    <tr>
+                        <td>{{transactionId}}</td>
+                        <td>{{sign}}</td>
+                        <td>{{realAmount}}</td>
+                        <td>{{orderId}}</td>
+                        <td>{{message}}</td>
+                        <td>{{forControl}}</td>
+                        <td>{{code}}</td>
+                        <td>{{callbackType}}</td>
+                        <td>{{balance}}</td>
+                    </tr>
                 <!-- and so on... -->
                 </tbody>
+                {{/each}}
+
             </table>
         </div>
     </div>

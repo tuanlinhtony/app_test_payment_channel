@@ -1,13 +1,12 @@
 const mongoose = require('mongoose')
 const  validator = require('validator')
 
-const callbackSchema = new mongoose.Schema(
-        {
-        transid: {
-            type: String,
+const callbackSchema = new mongoose.Schema({
+        balance: {
+            type: Number,
             required: true
         },
-        sign: {
+        callbackType: {
             type: String,
             required: true
         },
@@ -15,7 +14,27 @@ const callbackSchema = new mongoose.Schema(
             type: String,
             required: true
         },
+        forControl: {
+            type: String,
+            required: true
+        },
         message: {
+            type: String,
+            required: true
+        },
+        orderId: {
+            type: String,
+            required: true
+        },
+        realAmount: {
+            type: String,
+            required: true
+        },
+        sign: {
+            type: String,
+            required: true
+        },
+        transactionId: {
             type: String,
             required: true
         },
