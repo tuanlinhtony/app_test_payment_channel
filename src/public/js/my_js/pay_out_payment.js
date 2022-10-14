@@ -13,8 +13,8 @@ const chargePayoutSubmit = document.getElementById('chargePayoutSubmit')
 chargePayoutSubmit.addEventListener('submit', (e) => {
     e.preventDefault()
         const dataRequest = {
-            merchantCode: "0b586d24-8176-49ff-bac0-0ceb33616a22",
-            merchantKey: "odOYoUaKFqtmfOg",
+            merchantCode: "3bfdcc78-e0a6-4454-85ef-fb0a4b8785f3",
+            merchantKey: "sYZPhs7LIKjIory",
             transactionId: inputTransactionID.value,
             moneyRequest: inputAmount.value,
             bankCode: selectBank.value,
