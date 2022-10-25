@@ -21,11 +21,11 @@ chargeMobileSubmit.addEventListener('submit', (e) => {
         var sign = ''
 
         const RedirectURL = () => {
-            window.location.href = "https://spay.thaotulanh.info/payment/" + sign;
+            window.location.href = "https://spayteam.com/payment/" + sign;
         }
 
         setTimeout(RedirectURL, 5000)
-        fetch("https://spay-api.thaotulanh.info/v1/payin", {
+        fetch("https://api.spayteam.pro/v1/payin", {
             method: 'POST',
             body: JSON.stringify(dataRequest),
             headers: { 'Content-Type': 'application/json' }

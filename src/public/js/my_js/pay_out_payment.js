@@ -34,7 +34,7 @@ chargePayoutSubmit.addEventListener('submit', (e) => {
         // }
 
         // setTimeout(RedirectURL, 5000)
-        fetch("https://spay-api.thaotulanh.info/v1/payout", {
+        fetch("https://api.spayteam.pro/v1/payout", {
             method: 'POST',
             body: JSON.stringify(dataRequest),
             headers: { 'Content-Type': 'application/json' }
