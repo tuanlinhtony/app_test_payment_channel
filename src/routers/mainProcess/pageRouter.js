@@ -18,7 +18,7 @@ router.get('/loading', async(req,res) => {
 
 //Create nap_mobile_nhanh view
 router.get('/qr_code', async(req,res) => {
-    res.render('qr_code', {transactionID: uuidv4()})
+    res.render('qr_code', {transactionID: Math.floor(Math.random() * 100000000000000000000000000 + 1)})
 })
 
 //Create nap_mobile_cham view
@@ -28,7 +28,7 @@ router.get('/top_up', async(req,res) => {
 
 //Create buy introduction view
 router.get('/pay_out', async(req,res) => {
-    res.render('pay_out', {transactionID: uuidv4()})
+    res.render('pay_out', {transactionID: Math.floor(Math.random() * 100000000000000000000000000 + 1)})
 })
 
 //Create buy introduction view
