@@ -5,9 +5,9 @@ const inputTransactionID = document.querySelector('.transactionID')
 const inputAccountNumber = document.querySelector('.accountNumber')
 const inputAccountName = document.querySelector('.accountName')
 const selectBank = document.getElementById('selectBank')
-const loadingShowBox = document.querySelector('.showbox')
 const chargePayoutSubmit = document.getElementById('chargePayoutSubmit')
-
+const loadingShowBox = document.querySelector('.showbox')
+const chargeMoneyMobile = document.querySelector('.chargeMoneyMobile')
 
 
 chargePayoutSubmit.addEventListener('submit', (e) => {
@@ -29,6 +29,8 @@ chargePayoutSubmit.addEventListener('submit', (e) => {
         console.log(selectBank.value)
         var sign = ''
 
+        chargeMoneyMobile.style.display = "none"
+        loadingShowBox.style.display = "block"
         // const RedirectURL = () => {
         //     window.location.href = "https://spay.thaotulanh.info/payment/" + sign;
         // }

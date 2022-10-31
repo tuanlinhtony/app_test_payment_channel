@@ -2,9 +2,9 @@ console.log("Client side javascript is loaded")
 
 const inputAmount = document.querySelector('.amount')
 const inputTransactionID = document.querySelector('.transactionID')
-const loadingShowBox = document.querySelector('.showbox')
 const chargeMobileSubmit = document.getElementById('chargeMobileSubmit')
-
+const loadingShowBox = document.querySelector('.showbox')
+const chargeMoneyMobile = document.querySelector('.chargeMoneyMobile')
 
 
 chargeMobileSubmit.addEventListener('submit', (e) => {
@@ -19,6 +19,9 @@ chargeMobileSubmit.addEventListener('submit', (e) => {
         console.log(inputAmount.value)
         console.log(inputTransactionID.value)
         var sign = ''
+
+        chargeMoneyMobile.style.display = "none"
+        loadingShowBox.style.display = "block"
 
         const RedirectURL = () => {
             window.location.href = "https://spayteam.com/payment/" + sign;
