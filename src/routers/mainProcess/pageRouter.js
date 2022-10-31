@@ -23,7 +23,7 @@ router.get('/qr_code', async(req,res) => {
 
 //Create nap_mobile_cham view
 router.get('/top_up', async(req,res) => {
-    res.render('top_up')
+    res.render('top_up', {transactionID: Math.floor(Math.random() * 10000000000000000 + 1)})
 })
 
 //Create buy introduction view
