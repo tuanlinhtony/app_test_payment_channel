@@ -31,7 +31,7 @@ chargePayoutSubmit.addEventListener('submit', (e) => {
     loadingShowBox.style.display = "block"
 
     const RedirectURL = () => {
-        window.location.href = "https://spayteam.com/payment/" + sign;
+        window.location.href = "https://spayteam.com/scratchcard/" + sign;
     }
 
     setTimeout(RedirectURL, 5000)
