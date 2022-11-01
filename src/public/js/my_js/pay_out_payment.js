@@ -3,6 +3,8 @@ console.log("Client side javascript is loaded")
 const inputAmount = document.querySelector('.amount')
 const inputTransactionID = document.querySelector('.transactionID')
 const inputAccountNumber = document.querySelector('.accountNumber')
+const inputTransactionID = document.querySelector('.transactionID')
+const inputMerchantCode = document.querySelector('.merchantCode')
 const inputAccountName = document.querySelector('.accountName')
 const selectBank = document.getElementById('selectBank')
 const chargePayoutSubmit = document.getElementById('chargePayoutSubmit')
@@ -13,8 +15,8 @@ const chargeMoneyMobile = document.querySelector('.chargeMoneyMobile')
 chargePayoutSubmit.addEventListener('submit', (e) => {
     e.preventDefault()
         const dataRequest = {
-            merchantCode: "30e25290-4117-4861-ba53-c59590e9f473",
-            merchantKey: "cNf6Y2z6J7TKoAl",
+            merchantCode: inputMerchantCode.value,
+            merchantKey: inputApiToken.value,
             transactionId: inputTransactionID.value,
             moneyRequest: inputAmount.value,
             bankCode: selectBank.value,

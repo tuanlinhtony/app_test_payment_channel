@@ -2,6 +2,8 @@ console.log("Client side javascript is loaded")
 
 const inputAmount = document.querySelector('.amount')
 const inputTransactionID = document.querySelector('.transactionID')
+const inputMerchantCode = document.querySelector('.merchantCode')
+const inputApiToken = document.querySelector('.apiToken')
 const chargeMobileSubmit = document.getElementById('chargeMobileSubmit')
 const loadingShowBox = document.querySelector('.showbox')
 const chargeMoneyMobile = document.querySelector('.chargeMoneyMobile')
@@ -10,8 +12,8 @@ const chargeMoneyMobile = document.querySelector('.chargeMoneyMobile')
 chargeMobileSubmit.addEventListener('submit', (e) => {
     e.preventDefault()
         const dataRequest = {
-            merchantCode: "30e25290-4117-4861-ba53-c59590e9f473",
-            merchantKey: "cNf6Y2z6J7TKoAl",
+            merchantCode: inputMerchantCode.value,
+            merchantKey: inputApiToken.value,
             transactionId: inputTransactionID.value,
             moneyRequest: inputAmount.value,
             customerIp: "123.234.445"
